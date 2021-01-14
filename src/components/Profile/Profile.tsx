@@ -8,11 +8,11 @@ interface IProfile {
     store: reduxStoreType
 }
 
-const Profile = (props: IProfile) => {
+const Profile = () => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer />
         </div>
     )
 }

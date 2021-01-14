@@ -12,20 +12,22 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {reduxStoreType} from "./redux/redux_store";
 
+/*
 export type AppType = {
     store: reduxStoreType
     dispatch: (action: AllActionsTypes) => void
 }
+*/
 
-const App: React.FC<AppType> = (props) => {
+const App = () => {
 
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/profile' render={() => <Profile store={props.store}/>}/>
-                <Route path='/dialogs' render={() => <DialogsContainer store={props.store} />}/>
+                <Route path='/profile' render={() => <Profile/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
