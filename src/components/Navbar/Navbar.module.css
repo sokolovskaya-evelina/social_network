@@ -1,0 +1,32 @@
+.nav {
+    grid-area: n;
+}
+
+.item {
+    display: flex;
+}
+
+.item img {
+    width: 24px;
+    height: 24px;
+    margin-left: 20px;
+}
+
+.item a{
+    text-decoration: none;
+    color: #2A5885;
+    font-size: 16px;
+    margin-left: 7px;
+}
+
+.item a.active {
+    text-decoration: underline;
+}
+
+.item:hover {
+    background: #a8bbde;
+    border-radius: 5px;
+}
+
+
+

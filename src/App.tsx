@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navbar";
+import Profile from "./components/Profile/Profile";
+import {Dialogs} from "./components/Dialogs/Dialogs";
+import {Route} from "react-router-dom"
+import {News} from "./components/News/News";
+import {Music} from "./components/Music/Music";
+import {Settings} from "./components/Settings/Settings";
+import {AllActionsTypes,} from './redux/state';
+import '@fortawesome/fontawesome-free/css/all.min.css'
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {reduxStoreType} from "./redux/redux_store";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export type AppType = {
+    store: reduxStoreType
+    dispatch: (action: AllActionsTypes) => void
 }
+
+const App: React.FC<AppType> = (props) => {
+    const state = props.store.getState()
+
+    return (
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Route path='/profile' render={() => <Profile store={props.store}/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer store={props.store} />}/>
+                <Route path='/news' render={() => <News/>}/>
+                <Route path='/music' render={() => <Music/>}/>
+                <Route path='/settings' render={() => <Settings/>}/>
+            </div>
+        </div>
+    );
+}
+
 
 export default App;
