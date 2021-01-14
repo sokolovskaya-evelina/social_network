@@ -18,7 +18,6 @@ export type AppType = {
 }
 
 const App: React.FC<AppType> = (props) => {
-    const state = props.store.getState()
 
     return (
         <div className='app-wrapper'>

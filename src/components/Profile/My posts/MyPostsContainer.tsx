@@ -1,7 +1,6 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {FC} from 'react';
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile_reducer";
 import MyPosts from "./MyPosts";
-import {reduxStoreType} from "../../../redux/redux_store";
 
 //TODO затипизировать store, приходящий в пропсах
 

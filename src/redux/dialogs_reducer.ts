@@ -1,4 +1,4 @@
-import state, {AllActionsTypes, dialogsPageType, messageDataType} from "./state";
+import {AllActionsTypes, dialogsPageType, messageDataType} from "./state";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
@@ -7,7 +7,7 @@ export type DialogsActionsTypes =
     ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
 
-let initialState={
+let initialState = {
     dialogsData: [
         {id: 1, name: 'Katya'},
         {id: 2, name: 'Sasha'},

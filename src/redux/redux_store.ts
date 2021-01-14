@@ -1,13 +1,13 @@
 import {createStore, combineReducers} from "redux"
-import ProfileReducer, {addPostActionCreator} from "./profile_reducer";
+import ProfileReducer from "./profile_reducer";
 import DialogsReducer from "./dialogs_reducer";
 
-export type reduxStoreType =ReturnType<typeof createStore>
+export type reduxStoreType = ReturnType<typeof createStore>
 
 let reducers = combineReducers({
- profilePage: ProfileReducer,
- dialogsPage: DialogsReducer
+    profilePage: ProfileReducer,
+    dialogsPage: DialogsReducer
 })
- let store: reduxStoreType = createStore(reducers)
+let store: reduxStoreType = createStore(reducers)
 
 export default store

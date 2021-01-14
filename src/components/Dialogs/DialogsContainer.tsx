@@ -1,7 +1,6 @@
-import React, {ChangeEvent, FC} from "react";
+import React, {FC} from "react";
 import {addMessageActionCreator, updateNewMessageTextActionCreator,} from "../../redux/dialogs_reducer";
 import {Dialogs} from "./Dialogs";
-import {reduxStoreType} from "../../redux/redux_store";
 
 //TODO затипизировать store, приходящий в пропсах
 

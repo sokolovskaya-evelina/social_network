@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import {BrowserRouter} from "react-router-dom";
-import store  from "./redux/redux_store";
+import store from "./redux/redux_store";
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -13,7 +13,7 @@ const rerenderEntireTree = () => {
         <React.StrictMode>
             <BrowserRouter>
                 <App store={store}
-                dispatch={store.dispatch.bind(store)}/>
+                     dispatch={store.dispatch.bind(store)}/>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
@@ -21,12 +21,10 @@ const rerenderEntireTree = () => {
 }
 
 
-store.subscribe(()=> {
-    let state= store.getState()
+store.subscribe(() => {
     rerenderEntireTree()
 })
 rerenderEntireTree()
-
 
 
 // If you want to start measuring performance in your app, pass a function
