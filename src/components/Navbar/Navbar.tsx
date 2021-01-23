@@ -1,36 +1,45 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import home from "./../../img/home.png"
-import message from "./../../img/messages.png"
-import news from "./../../img/news.png"
-import music from "./../../img/music.png"
-import settings from "./../../img/settings.png"
 
 
 const Navbar = () => {
-    return <nav className={s.nav}>
-        <div className={s.item}>
-            <NavLink to='/profile' activeClassName={s.active}><img src={home} alt="home"/></NavLink>
-            <NavLink to='/profile' activeClassName={s.active}>Profile</NavLink>
-        </div>
-        <div className={s.item}>
-            <NavLink to='/dialogs' activeClassName={s.active}><img src={message} alt="message"/></NavLink>
-            <NavLink to='/dialogs' activeClassName={s.active}>Messages</NavLink>
-        </div>
-        <div className={s.item}>
-            <NavLink to='/news' activeClassName={s.active}><img src={news} alt="news"/></NavLink>
-            <NavLink to='/news' activeClassName={s.active}>News</NavLink>
-        </div>
-        <div className={s.item}>
-            <NavLink to='/music' activeClassName={s.active}><img src={music} alt="music"/></NavLink>
-            <NavLink to='/music' activeClassName={s.active}>Music</NavLink>
-        </div>
-        <div className={s.item}>
-            <NavLink to='/settings' activeClassName={s.active}><img src={settings} alt="settings"/></NavLink>
-            <NavLink to='/settings' activeClassName={s.active}>Settings</NavLink>
-        </div>
-    </nav>
+    return (
+            <div className={s.menuSidebar}>
+                <div className={s.user}>
+                    <img src={'https://static10.tgstat.ru/channels/_0/34/340648ab5ac20fe131ac165c13a6c5d5.jpg'} alt="avatar" className={s.userAvatar}/>
+                        <span className={s.userName}>Alisa Grey</span>
+                </div>
+                <nav className={s.navGroup}>
+                        <NavLink to='/profile' className={s.navLink} activeClassName={s.active}>
+                            <span className={"fas fa-home"+' '+s.navIcon}/>
+                            <span className={s.navText}>Profile</span>
+                        </NavLink>
+                        <NavLink to='/dialogs' className={s.navLink} activeClassName={s.active}>
+                            <span className={"fas fa-comment"+' '+s.navIcon}/>
+                            <span className={s.navText}>Messages</span>
+                        </NavLink>
+                        <NavLink to='/users' className={s.navLink} activeClassName={s.active}>
+                            <span className={"fas fa-user-friends"+' '+s.navIcon}/>
+                            <span className={s.navText}>Users</span>
+                        </NavLink>
+                        <NavLink to='/news' className={s.navLink} activeClassName={s.active}>
+                            <span className={"fas fa-newspaper"+' '+s.navIcon}/>
+                            <span className={s.navText}>News</span>
+                        </NavLink>
+                        <NavLink to='/music' className={s.navLink} activeClassName={s.active}>
+                            <span className={"fas fa-music"+' '+s.navIcon}/>
+                            <span className={s.navText}>Music</span>
+                        </NavLink>
+                        <NavLink to='/settings' className={s.navLink} activeClassName={s.active}>
+                            <span className={"fas fa-cogs"+' '+s.navIcon}/>
+                            <span className={s.navText}>Settings</span>
+                        </NavLink>
+                </nav>
+            </div>
+
+    )
+
 }
 
 export default Navbar;

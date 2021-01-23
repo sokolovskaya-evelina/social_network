@@ -10,6 +10,8 @@ type MyPostType = {
     newPostText: string
 }
 
+//TODO сделать отступы между постами нормально
+
 const MyPosts: FC<MyPostType> = (props) => {
     let postElements = props.posts.map(post => <Post massage={post.post} likeCount={post.likeCount}/>)
 
@@ -18,22 +20,31 @@ const MyPosts: FC<MyPostType> = (props) => {
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+
         let newPostText = e.currentTarget.value
         props.updateNewPostText(newPostText)
     }
 
     return (
-        <div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea onChange={onPostChange} value={props.newPostText}/>
+        <div className={s.createPost}>
+            <div className={s.createPostHeader}>
+                <h4 className={s.createPostTitle}>
+                    Create Post
+                </h4>
+            </div>
+
+            <div className={s.createPostBody}>
+
+                <div className={s.createPostInput}>
+                    <textarea className={s.createPostTextarea} onChange={onPostChange} value={props.newPostText}/>
                 </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
+                <div className={s.createPostFooter}>
+                    <button className={s.tag} onClick={onAddPost}>
+                        <i className={"fas fa-location-arrow"+' '+s.tagIcon}/>
+                        Add post</button>
                 </div>
             </div>
-            <div className={s.posts}>
+            <div>
                 {postElements}
             </div>
         </div>

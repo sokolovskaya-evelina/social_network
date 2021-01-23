@@ -1,16 +1,12 @@
 import React from 'react';
 import s from './Profile.module.css';
 import ProfileInfo from "./My posts/ProfileInfo/ProfileInfo";
-import MyPostsContainer from "./My posts/MyPostsContainer";
-import {reduxStoreType} from "../../redux/redux_store";
+import MyPostsContainer from "./My posts/MyPostsContainer"
 
-interface IProfile {
-    store: reduxStoreType
-}
 
 const Profile = () => {
     return (
-        <div className={s.content}>
+        <div className={s.mainFeed}>
             <ProfileInfo/>
             <MyPostsContainer />
         </div>

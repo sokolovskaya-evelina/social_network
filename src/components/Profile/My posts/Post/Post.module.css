@@ -1,9 +1,144 @@
-.item {
-  color: #000;
+.post {
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px 0;
+
 }
 
-.item img {
-  width: 50px;
-  border-radius: 50%;
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.postButton {
+    background-color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: #8C8C8C;
+}
+
+.postButton:hover {
+    border: 1px solid #9ED112FF;
+    color: #9ED112FF;
+}
+
+
+.postHeader .userAvatar {
+    width: 48px;
+    height: 48px;
+    margin-right: 12px;
+}
+
+.postInfo {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.settingIcon {
+    color: #8C8C8C;
+}
+
+.postAuthor {
+    width: 100%;
+    font-size: 14px;
+    line-height: 22px;
+    color: #50B517FF;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.postTime {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #8C8C8C;
+}
+
+.postTime:after {
+    display: inline-block;
+    margin-left: 6px;
+    margin-right: 6px;
+    vertical-align: middle;
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #BFBFBF;
+    border-radius: 50%;
+}
+
+.postTimeInfo {
+    display: flex;
+    align-items: center;
+}
+
+.postText {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #595959;
+    margin-bottom: 16px;
+}
+
+
+.postImage {
+    border: 1px solid #BFBFBF;
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+.likes {
+    margin-top: 9px;
+    margin-bottom: 9px;
+    display: flex;
+    align-items: center;
+    color: #50B517FF;
+}
+
+.likesCounter {
+    font-size: 14px;
+    line-height: 22px;
+    color: #595959;
+    margin-left: 4px;
+}
+
+.postFooter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.postButtonText {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    color: #595959;
+    margin-left: 8px;
+}
+
+.buttonIcon {
+    color: #595959;
+    margin-right: 8px;
+}
+
+.buttonIcon:hover {
+    color: #9ED112FF;
+    margin-right: 8px;
+}
+
+.postFooter:before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #e8e8e8;
 }
 

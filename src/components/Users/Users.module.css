@@ -1,0 +1,51 @@
+
+.userBlock {
+    display: flex;
+
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.userInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.followButton {
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid gray;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 15px;
+    color: #595959;
+}
+.followButton:hover {
+    border: 1px solid #9ED112FF;
+    border-radius: 10px;
+    color: #9ED112FF;
+}
+.followIcon{
+    margin-right: 5px;
+}
+.userDescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+    color: #595959;
+    padding: 0 15px;
+}
+
+.userPhoto {
+    border-radius: 5px;
+    width: 100px;
+    padding-bottom: 6px;
+}

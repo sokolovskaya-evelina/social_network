@@ -1,32 +1,75 @@
-.nav {
-    grid-area: n;
-}
+span{
+    font-family: sans-serif;
 
-.item {
+}
+.container {
     display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
 }
 
-.item img {
+.menuSidebar {
+    margin-top: 18px;
+    width: 190px;
+    margin-right: 12px;
+}
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.userAvatar {
+    margin-right: 8px;
+}
+
+
+.menuSidebar .user {
+    padding-left: 10px;
+}
+
+.menuSidebar .userAvatar {
     width: 24px;
     height: 24px;
-    margin-left: 20px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
-.item a{
+.menuSidebar .userName {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #262626;
+}
+
+.navGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.navLink {
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
     text-decoration: none;
-    color: #2A5885;
-    font-size: 16px;
-    margin-left: 7px;
+    color: #595959;
+    line-height: 22px;
+    font-size: 14px;
 }
 
-.item a.active {
-    text-decoration: underline;
+.active {
+    background: #fff;
+    color: #262626;
 }
 
-.item:hover {
-    background: #a8bbde;
-    border-radius: 5px;
+.navText {
+    margin-left: 8px;
 }
-
-
+.navIcon {
+    color: #9ED112FF;
+}
 
