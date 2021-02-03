@@ -14,6 +14,5 @@ let reducers = combineReducers({
 })
 
 let store: reduxStoreType = createStore(reducers)
-debugger
 
 export default store
