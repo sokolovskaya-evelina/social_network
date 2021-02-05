@@ -6,7 +6,8 @@
 .descriptionBlock{
     display: flex;
 
-    padding: 15px;
+    padding: 20px;
+    width: 1000px;
 
     background: #FFFFFF;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -15,17 +16,33 @@
 }
 
 .profileImage{
-    width: 280px;
+    width: 380px;
+    margin-right: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
 }
 
 .description{
     display: flex;
     flex-direction: column;
-    justify-content: center;
 
     color: #595959;
     line-height: 22px;
     font-size: 14px;
 
     margin-left: 15px;
+}
+.descriptionTextName{
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+b{
+    margin-right: 10px;
+}
+
+
+.descriptionTextContacts{
+    margin-left: 70px;
 }

@@ -1,5 +1,6 @@
 .mainFeed {
     margin-top: 18px;
-    max-width: 590px;
+    max-width: 100%;
+    margin-right: 50px;
     flex-grow: 1;
 }

@@ -10,6 +10,7 @@ import {Settings} from "./components/Settings/Settings";
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 /*
 export type AppType = {
@@ -17,7 +18,6 @@ export type AppType = {
     dispatch: (action: AllActionsTypes) => void
 }
 */
-
 const App = () => {
 
     return (
@@ -25,12 +25,12 @@ const App = () => {
             <Header/>
             <div className='container'>
                 <Navbar/>
-                    <Route path='/profile' render={() => <Profile/>}/>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
+                <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                <Route path='/users' render={() => <UsersContainer/>}/>
+                <Route path='/news' render={() => <News/>}/>
+                <Route path='/music' render={() => <Music/>}/>
+                <Route path='/settings' render={() => <Settings/>}/>
             </div>
 
         </div>
