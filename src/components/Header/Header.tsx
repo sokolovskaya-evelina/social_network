@@ -1,9 +1,10 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 import s from './Header.module.css';
 
 
 //TODO сделать иконки на панели навигации
-export const Header = () => {
+export const Header = (props: any) => {
     return (
         <header className={s.header}>
             <form className={s.searchForm}>
@@ -12,8 +13,11 @@ export const Header = () => {
             </form>
             <nav className={s.navigation}>
                 <div className={s.user}>
-                    <img src={'https://static10.tgstat.ru/channels/_0/34/340648ab5ac20fe131ac165c13a6c5d5.jpg'} alt="avatar" className={s.userAvatar}/>
-                    <span className={s.userName}>Alisa</span>
+                    <img src={'https://static10.tgstat.ru/channels/_0/34/340648ab5ac20fe131ac165c13a6c5d5.jpg'}
+                         alt="avatar" className={s.userAvatar}/>
+                    {props.isAuth ?
+                        <span className={s.userName}>{props.login}</span> :
+                        <NavLink to={'/login'}>Login</NavLink>}
                 </div>
             </nav>
         </header>
