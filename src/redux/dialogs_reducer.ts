@@ -4,8 +4,8 @@ const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 export type DialogsActionsTypes =
-    ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof updateNewMessageTextActionCreator>
+    ReturnType<typeof addMessageAC>
+    | ReturnType<typeof updateNewMessageTextAC>
 
 let initialState = {
     dialogsData: [
@@ -52,12 +52,12 @@ const DialogsReducer = (state: dialogsPageType = initialState, action: AllAction
 }
 
 
-export const addMessageActionCreator = () => ({
+export const addMessageAC = () => ({
         type: ADD_MESSAGE
     } as const
 )
 
-export const updateNewMessageTextActionCreator = (newMessage: string) => ({
+export const updateNewMessageTextAC = (newMessage: string) => ({
         type: UPDATE_NEW_MESSAGE_TEXT,
         newMessage: newMessage
     } as const
