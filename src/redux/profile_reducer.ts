@@ -1,4 +1,5 @@
-import {AllActionsTypes, profilePageType} from "./state";
+import {AllActionsTypes} from "./state";
+import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -70,6 +71,14 @@ export const setUserProfile = (profile: string) => {
     } as const
 }
 
+export const getProfilePage = (userId: number) => {
+    return (dispatch: any) => {
+        profileAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
+}
 
 export default ProfileReducer
 

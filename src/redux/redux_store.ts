@@ -1,8 +1,9 @@
-import {createStore, combineReducers} from "redux"
+import {createStore, combineReducers, applyMiddleware} from "redux"
 import ProfileReducer from "./profile_reducer";
 import DialogsReducer from "./dialogs_reducer";
 import UsersReducer from "./users_reducer";
 import AuthReducer from "./auth_reducer";
+import thunkMiddleware from 'redux-thunk'
 
 //TODO спросить про типизацию!!!
 
@@ -15,6 +16,7 @@ let reducers = combineReducers({
     auth: AuthReducer,
 })
 
-let store: reduxStoreType = createStore(reducers)
-
+let store: reduxStoreType = createStore(reducers, applyMiddleware(thunkMiddleware))
+// @ts-ignore
+window.store = store;
 export default store

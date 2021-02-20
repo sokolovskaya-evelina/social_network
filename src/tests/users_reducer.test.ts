@@ -1,9 +1,9 @@
 import UsersReducer, {
-    followAC,
-    setCurrentPagesAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetching, toggleIsFollowingProgressAC, unFollowAC
+    followSuccess,
+    setCurrentPages,
+    setTotalUsersCount,
+    setUsers,
+    toggleInFetching, toggleIsFollowingProgress, unFollowSuccess
 } from "../redux/users_reducer";
 
 let startState = {}
@@ -22,21 +22,21 @@ beforeEach(() => {
 })
 
 test('current page should be update', () => {
-    const action = setCurrentPagesAC(5)
+    const action = setCurrentPages(5)
     const endState = UsersReducer(startState, action)
 
     expect(endState.currentPage).toBe(5)
 })
 
 test('total users count should be update', () => {
-    const action = setTotalUsersCountAC(10)
+    const action = setTotalUsersCount(10)
     const endState = UsersReducer(startState, action)
 
     expect(endState.totalUsersCount).toBe(10)
 })
 
 test('toggle is fetching should be update', () => {
-    const action = toggleIsFetching(false)
+    const action = toggleInFetching(false)
     const endState = UsersReducer(startState, action)
 
     expect(endState.isFetching).toBeFalsy()
