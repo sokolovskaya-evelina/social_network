@@ -8,6 +8,8 @@ import {
 } from "../../redux/users_reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 
 //TODO сделать типизацию
 
@@ -48,10 +50,14 @@ let mapStateToProps = (state: any) => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-export default connect(mapStateToProps, {
-    follow,
-    unFollow,
-    setCurrentPages,
-    toggleIsFollowingProgress,
-    getUsers
-})(UsersContainer);
+
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        follow,
+        unFollow,
+        setCurrentPages,
+        toggleIsFollowingProgress,
+        getUsers
+    })
+)(UsersContainer)

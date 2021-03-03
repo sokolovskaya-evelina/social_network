@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC} from "react";
 import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import avatar from './../../img/ava.jpg'
 import {dialogsPageType} from "../../redux/state";
 
@@ -54,7 +54,6 @@ interface Dialogs {
 const Dialogs: FC<any> = (props) => {
 
     let state = props.dialogsPage
-
     let dialogsElements = state.dialogsData.map((names: any) =>
         <DialogItem id={names.id.toString()} name={names.name} key={names.id}/>
     )
@@ -72,6 +71,7 @@ const Dialogs: FC<any> = (props) => {
         let text = e.currentTarget.value
         props.updateNewMessage(text)
     }
+
 
     return (
         <div className={s.content}>
