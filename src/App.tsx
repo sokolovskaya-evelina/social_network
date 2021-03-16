@@ -12,12 +12,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 
-/*
-export type AppType = {
-    store: reduxStoreType
-    dispatch: (action: AllActionsTypes) => void
-}
-*/
+
 const App = () => {
     return (
         <div>

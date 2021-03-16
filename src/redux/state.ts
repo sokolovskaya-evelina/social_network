@@ -21,7 +21,7 @@ export type profilePageType = {
 export type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
     messageData: Array<messageDataType>
-    newMessageText: string
+    newMessageText?: string
 }
 export type postDataType = {
     id: number

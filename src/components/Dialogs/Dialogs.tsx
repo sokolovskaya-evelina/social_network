@@ -3,6 +3,9 @@ import s from './Dialogs.module.css'
 import {NavLink, Redirect} from "react-router-dom";
 import avatar from './../../img/ava.jpg'
 import {dialogsPageType} from "../../redux/state";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import Textarea from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 type DialogItemType = {
     name: string
@@ -22,7 +25,8 @@ export const DialogItem = (props: DialogItemType) => {
     return (
         <div className={s.item}>
             <div className="img">
-                <NavLink to={path}><img src={'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png'} alt='avatar' className={s.storyItem}/></NavLink>
+                <NavLink to={path}><img src={'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png'}
+                                        alt='avatar' className={s.storyItem}/></NavLink>
             </div>
             <div className="text">
                 <NavLink className={s.storyItem} to={path}>{props.name}</NavLink>
@@ -62,37 +66,48 @@ const Dialogs: FC<any> = (props) => {
         <Message id={messages.id.toString()} message={messages.message} key={messages.id}/>
     )
 
-
-    let addMessage = () => {
-        props.addMessage()
+    let addNewMessage = (values: AddMessageFormDataType) => {
+        props.addMessage(values.newMessageText)
     }
-
-    let onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.currentTarget.value
-        props.updateNewMessage(text)
-    }
-
 
     return (
         <div className={s.content}>
             <div className={s.dialog_wrapper}>
                 <div className={s.messages_items}>
                     {messageElements}
-                    <div className={s.add}>
-                        <textarea className={s.textarea} onChange={onMessageChange} value={props.newMessageText}/>
-                        <button className={"far fa-paper-plane" + " " + s.addMessageBtn} onClick={addMessage}/>
-                    </div>
+                        <AddMessageReduxForm onSubmit={addNewMessage}/>
                 </div>
                 <div className={s.dialog_items}>
                     <h4 className={s.storiesTitle}>Friends</h4>
                     {dialogsElements}
                 </div>
             </div>
-
-
         </div>
     )
-
 }
+
+type AddMessageFormDataType = {
+    newMessageText: string
+}
+
+const maxLength100 = maxLengthCreator(100)
+
+const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormDataType>> = (props) => {
+    return (
+            <form className={s.add} onSubmit={props.handleSubmit}>
+                <Field
+                    component={Textarea}
+                    name={'newMessageText'}
+                    className={s.textarea}
+                    placeholder={'Enter your message'}
+                    validate={[required, maxLength100]}
+                />
+                <button className={"far fa-paper-plane" + " " + s.addMessageBtn}/>
+            </form>
+    );
+};
+
+const AddMessageReduxForm = reduxForm<AddMessageFormDataType>({form: 'dialogAddMessageForm'})(AddMessageForm)
+
 
 export default Dialogs

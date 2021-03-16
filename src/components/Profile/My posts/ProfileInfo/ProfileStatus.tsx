@@ -36,7 +36,6 @@ class ProfileStatus extends React.Component<any, any> {
     }
 
     render() {
-        debugger
         return (
             <div>
                 <img className={s.profileImage}

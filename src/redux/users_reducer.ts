@@ -1,4 +1,3 @@
-import {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile_reducer";
 import {usersAPI} from "../api/api";
 
 const FOLLOW = 'FOLLOW'

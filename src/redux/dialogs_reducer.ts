@@ -1,11 +1,9 @@
 import {AllActionsTypes, dialogsPageType, messageDataType} from "./state";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 export type DialogsActionsTypes =
     ReturnType<typeof addMessageAC>
-    | ReturnType<typeof updateNewMessageTextAC>
 
 let initialState = {
     dialogsData: [
@@ -23,7 +21,6 @@ let initialState = {
         {id: 4, message: 'Fine. And you?'},
         {id: 5, message: 'Good. Thanks'}
     ],
-    newMessageText: ''
 }
 
 const DialogsReducer = (state: dialogsPageType = initialState, action: AllActionsTypes) => {
@@ -34,15 +31,8 @@ const DialogsReducer = (state: dialogsPageType = initialState, action: AllAction
                 ...state,
                 messageData: [...state.messageData, {
                     id: 7,
-                    message: state.newMessageText
+                    message: action.newMessageText
                 }],
-                newMessageText: ''
-            }
-            return stateCopy
-        case UPDATE_NEW_MESSAGE_TEXT:
-            stateCopy = {
-                ...state,
-                newMessageText: action.newMessage
             }
             return stateCopy
         default:
@@ -52,14 +42,9 @@ const DialogsReducer = (state: dialogsPageType = initialState, action: AllAction
 }
 
 
-export const addMessageAC = () => ({
-        type: ADD_MESSAGE
-    } as const
-)
-
-export const updateNewMessageTextAC = (newMessage: string) => ({
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newMessage: newMessage
+export const addMessageAC = (newMessageText: string) => ({
+        type: ADD_MESSAGE,
+        newMessageText
     } as const
 )
 
