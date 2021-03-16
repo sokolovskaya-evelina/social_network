@@ -4,6 +4,7 @@ import DialogsReducer from "./dialogs_reducer";
 import UsersReducer from "./users_reducer";
 import AuthReducer from "./auth_reducer";
 import thunkMiddleware from 'redux-thunk'
+import {reducer as formReducer} from "redux-form";
 
 //TODO спросить про типизацию!!!
 
@@ -14,6 +15,7 @@ let reducers = combineReducers({
     dialogsPage: DialogsReducer,
     usersPage: UsersReducer,
     auth: AuthReducer,
+    form: formReducer
 })
 
 let store: reduxStoreType = createStore(reducers, applyMiddleware(thunkMiddleware))

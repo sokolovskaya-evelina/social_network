@@ -19,7 +19,6 @@ export type AppType = {
 }
 */
 const App = () => {
-
     return (
         <div>
             <HeaderContainer/>
@@ -33,7 +32,6 @@ const App = () => {
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
             </div>
-
         </div>
     );
 }
