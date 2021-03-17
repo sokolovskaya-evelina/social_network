@@ -17,7 +17,8 @@ export const Header = (props: any) => {
                     <img src={'https://static10.tgstat.ru/channels/_0/34/340648ab5ac20fe131ac165c13a6c5d5.jpg'}
                          alt="avatar" className={s.userAvatar}/>
                     {props.isAuth ?
-                        <span className={s.userName}>{props.login}</span> : <NavLink to={'/login'}>Login</NavLink>}
+                        <span className={s.userName}>{props.login} <button onClick={props.logout}>Logout</button></span>  : <NavLink to={'/login'}>Login</NavLink>}
+
                 </div>
             </nav>
         </header>

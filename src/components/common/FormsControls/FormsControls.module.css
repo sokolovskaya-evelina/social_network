@@ -7,5 +7,11 @@
 }
 
 .error span {
-    color: red;
+    color: crimson;
+}
+
+.form_summary_error {
+    border: 1px solid crimson;
+    padding: 5px;
+    color: #9ed112;
 }
