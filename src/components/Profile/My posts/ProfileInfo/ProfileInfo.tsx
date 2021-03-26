@@ -2,9 +2,15 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
-import avatar from './../../../../assets/avatar.png'
+import {ProfileType} from "../../../../types/types";
 
-const ProfileInfo = (props: any) => {
+export type ProfileInfoPropsType = {
+    profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
+}
+
+const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     if (!props.profile) {
         return <Preloader/>
     }

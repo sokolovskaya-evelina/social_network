@@ -3,18 +3,19 @@ import {addMessageAC,} from "../../redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
-import {compose} from "redux";
+import {compose, Dispatch} from "redux";
+import {reduxStoreType} from "../../redux/redux_store";
 
 //TODO типизация
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: reduxStoreType) => {
     return {
         dialogsPage: state.dialogsPage,
-        newMessageText: state.dialogsPage.newMessageText,
+        newMessageText: state.dialogsPage,
     }
 }
 
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         addMessage: (newMessageText: string) => {
             dispatch(addMessageAC(newMessageText))

@@ -6,9 +6,7 @@ import AuthReducer from "./auth_reducer";
 import thunkMiddleware from 'redux-thunk'
 import {reducer as formReducer} from "redux-form";
 
-//TODO спросить про типизацию!!!
-
-export type reduxStoreType = ReturnType<typeof createStore>
+export type reduxStoreType = ReturnType<typeof reducers>
 
 let reducers = combineReducers({
     profilePage: ProfileReducer,
@@ -18,7 +16,7 @@ let reducers = combineReducers({
     form: formReducer
 })
 
-let store: reduxStoreType = createStore(reducers, applyMiddleware(thunkMiddleware))
+let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 // @ts-ignore
 window.store = store;
 export default store

@@ -2,6 +2,7 @@ import React from 'react';
 import {addPostActionCreator} from "../../../redux/profile_reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import {reduxStoreType} from "../../../redux/redux_store";
 
 
 //TODO типизация

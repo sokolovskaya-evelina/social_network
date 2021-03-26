@@ -1,9 +1,11 @@
-import {AllActionsTypes, dialogsPageType, messageDataType} from "./state";
+import {dialogsDataType, messageDataType} from "../types/types";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
 
-export type DialogsActionsTypes =
-    ReturnType<typeof addMessageAC>
+
+export type ActionsTypes = ReturnType<typeof addMessageAC>
+type initialStateType = typeof initialState
+
 
 let initialState = {
     dialogsData: [
@@ -13,17 +15,17 @@ let initialState = {
         {id: 4, name: 'Alisa'},
         {id: 5, name: 'Ivan'},
         {id: 6, name: 'Roma'},
-    ],
+    ] as Array<dialogsDataType>,
     messageData: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'Hello'},
         {id: 3, message: 'How are you?'},
         {id: 4, message: 'Fine. And you?'},
         {id: 5, message: 'Good. Thanks'}
-    ],
+    ] as Array<messageDataType>,
 }
 
-const DialogsReducer = (state: dialogsPageType = initialState, action: AllActionsTypes) => {
+const DialogsReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
     let stateCopy
     switch (action.type) {
         case ADD_MESSAGE:
@@ -41,12 +43,6 @@ const DialogsReducer = (state: dialogsPageType = initialState, action: AllAction
     }
 }
 
-
-export const addMessageAC = (newMessageText: string) => ({
-        type: ADD_MESSAGE,
-        newMessageText
-    } as const
-)
-
+export const addMessageAC = (newMessageText: string) => ({type: ADD_MESSAGE, newMessageText} as const)
 
 export default DialogsReducer

@@ -1,18 +1,22 @@
-import {authAPI} from "../api/api";
+import {authAPI, ResultCodeEnum} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {Dispatch} from "redux";
+import {GetStateType} from "../types/types";
 
 const SET_USER_DATA = 'SET_USER_DATA'
 
-//TODO типизация
-
 let initialState = {
-    userId: null,
-    email: null,
-    login: null,
+    userId: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false,
 }
 
-const AuthReducer = (state: any = initialState, action: any) => {
+type initialStateType = typeof initialState
+type ActionTypes =
+    | ReturnType<typeof setAuthUserData>
+
+const AuthReducer = (state = initialState, action: ActionTypes): initialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -26,37 +30,36 @@ const AuthReducer = (state: any = initialState, action: any) => {
 
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
         type: SET_USER_DATA,
-        payload: {userId, email, login,isAuth}
-    }
+        payload: {userId, email, login, isAuth}
+    } as const
 )
 
-export const getAuthUserData = () => (dispatch: any) => {
+export const getAuthUserData = () => (dispatch: Dispatch<ActionTypes>, getState: GetStateType) => {
     authAPI.me()
         .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data
+            if (response.resultCode === ResultCodeEnum.Success) {
+                let {id, email, login} = response.data
                 dispatch(setAuthUserData(id, email, login, true))
             }
         })
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
-
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch, getState: GetStateType) => {
     authAPI.login(email, password, rememberMe)
         .then(response => {
-            if (response.data.resultCode === 0) {
+            if (response.resultCode === ResultCodeEnum.Success) {
                 dispatch(setAuthUserData(null, null, null, false))
             } else {
-                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some Error'
+                let message = response.messages.length > 0 ? response.messages[0] : 'Some Error'
                 dispatch(stopSubmit("login", {_error: message}))
             }
         })
 }
-
-export const logout = () => (dispatch: any) => {
+//TODO типизация
+export const logout = () => (dispatch: any, getState: GetStateType) => {
     authAPI.logout()
         .then(response => {
-            if (response.data.resultCode === 0) {
+            if (response.resultCode === ResultCodeEnum.Success) {
                 dispatch(getAuthUserData())
             }
         })

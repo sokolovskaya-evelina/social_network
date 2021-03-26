@@ -1,8 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import s from "./ProfileInfo.module.css";
 import avatar from "../../../../assets/avatar.png";
+import {ProfileInfoPropsType} from "./ProfileInfo";
+import {reduxStoreType} from "../../../../redux/redux_store";
 
-class ProfileStatus extends React.Component<any, any> {
+class ProfileStatus extends React.Component<ProfileInfoPropsType > {
     state = {
         editMode: false,
         status: this.props.status
@@ -27,7 +29,7 @@ class ProfileStatus extends React.Component<any, any> {
         })
     }
 
-    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
+    componentDidUpdate(prevProps: Readonly<ProfileInfoPropsType>, prevState: Readonly<any>) {
         if(prevProps.status !== this.props.status) {
             this.setState({
                 status: this.props.status

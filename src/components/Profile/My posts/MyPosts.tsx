@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {postDataType} from "../../../redux/state";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import Textarea from "../../common/FormsControls/FormsControls";
+import {postDataType} from "../../../types/types";
 
 type MyPostType = {
     addPost: (newPostText: string) => void
@@ -13,7 +13,6 @@ type MyPostType = {
 }
 
 //TODO сделать отступы между постами нормально
-
 const MyPosts: FC<MyPostType> = (props) => {
     let postElements = props.posts.map(post => <Post massage={post.post} likeCount={post.likeCount}/>)
 

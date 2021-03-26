@@ -2,9 +2,14 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Header.module.css';
 
+type HeaderPropsType={
+    login: string,
+    isAuth: boolean,
+    logout: ()=>void
+}
 
 //TODO сделать иконки на панели навигации
-export const Header = (props: any) => {
+export const Header: React.FC<any> = (props) => {
 
     return (
         <header className={s.header}>

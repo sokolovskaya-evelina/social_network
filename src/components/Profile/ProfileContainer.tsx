@@ -5,6 +5,7 @@ import {getProfilePage, getStatus, updateStatus} from "../../redux/profile_reduc
 import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {compose} from "redux";
+import {reduxStoreType} from "../../redux/redux_store";
 
 class ProfileContainer extends React.Component<any, any> {
     componentDidMount() {
@@ -28,10 +29,10 @@ class ProfileContainer extends React.Component<any, any> {
     }
 }
 
-let mapStateToProps = (state: any) => ({
+let mapStateToProps = (state: reduxStoreType) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
-    authorizedUerId: state.userId,
+    authorizedUerId: state.auth.userId,
     isAuth: state.auth.isAuth
 
 })
