@@ -44,8 +44,8 @@ export const getAuthUserData = () => (dispatch: Dispatch<ActionTypes>, getState:
         })
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch, getState: GetStateType) => {
-    authAPI.login(email, password, rememberMe)
+export const logoutUser = () => (dispatch: Dispatch, getState: GetStateType) => {
+    authAPI.logout()
         .then(response => {
             if (response.resultCode === ResultCodeEnum.Success) {
                 dispatch(setAuthUserData(null, null, null, false))
@@ -56,8 +56,8 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
         })
 }
 //TODO типизация
-export const logout = () => (dispatch: any, getState: GetStateType) => {
-    authAPI.logout()
+export const loginUser = (email: string, password: string, rememberMe: boolean) => (dispatch: any, getState: GetStateType) => {
+    authAPI.login(email,password,rememberMe)
         .then(response => {
             if (response.resultCode === ResultCodeEnum.Success) {
                 dispatch(getAuthUserData())
