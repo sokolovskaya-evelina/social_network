@@ -1,17 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {
-    follow,
-    getUsers,
-    setCurrentPages,
-    toggleIsFollowingProgress, unFollow,
-} from "../../redux/users_reducer";
+import {follow, getUsers, setCurrentPages, toggleIsFollowingProgress, unFollow,} from "../../redux/users_reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {UserType} from "../../types/types";
 import {reduxStoreType} from "../../redux/redux_store";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsersPages
+} from "../../redux/users-selectors";
 
 type MapStatePropsType = {
     currentValue: number
@@ -33,6 +36,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentValue, this.props.pageSize)
     }
+
     onPageChanged = (pageNumber: number) => {
         const {pageSize} = this.props
         this.props.getUsers(pageNumber, pageSize)
@@ -57,14 +61,14 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 }
 
 //TODO спросить типизацию
-let mapStateToProps = (state: reduxStoreType)/*:MapStatePropsType*/ => {
+let mapStateToProps = (state: reduxStoreType) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsersPages(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 

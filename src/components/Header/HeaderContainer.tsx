@@ -1,19 +1,13 @@
 import React from 'react';
-import Header, {HeaderPropsType} from "./Header";
+import Header from "./Header";
 import {connect} from "react-redux";
-import {getAuthUserData, logoutUser} from "../../redux/auth_reducer";
+import {logoutUser} from "../../redux/auth_reducer";
 import {reduxStoreType} from "../../redux/redux_store";
 
-type MapPropsType = {
+type MapPropsType = {}
 
-}
 //TODO типизация
 class HeaderContainer extends React.Component<any, any> {
-    componentDidMount() {
-        this.props.getAuthUserData()
-
-    }
-
     render() {
         return <Header {...this.props} />
     }
@@ -24,4 +18,4 @@ const mapStateToProps = (state: reduxStoreType) => ({
     login: state.auth.login
 })
 
-export default connect(mapStateToProps, {getAuthUserData, logoutUser})(HeaderContainer);
+export default connect(mapStateToProps, {logoutUser})(HeaderContainer);
