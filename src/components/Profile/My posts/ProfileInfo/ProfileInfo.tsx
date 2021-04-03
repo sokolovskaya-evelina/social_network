@@ -3,7 +3,9 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 import {ProfileType} from "../../../../types/types";
-import avatar from "../../../../assets/avatar.png";
+import {Avatar, Card, Image} from "antd";
+import {Content} from "antd/es/layout/layout";
+import {UserOutlined} from "@ant-design/icons";
 
 export type ProfileInfoPropsType = {
     profile: ProfileType
@@ -16,14 +18,16 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         return <Preloader/>
     }
     return (
-        <div className={s.mainFeed}>
-            <div className={s.descriptionBlock}>
-                <img className={s.profileImage}
-                     src={props.profile.photos.large ? props.profile.photos.large : avatar}/>
+        <Card style={{width: '100%',}}>
+
+            <Content style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+
+                {props.profile.photos.large
+                    ? <Image height={'100%'} src={props.profile.photos.large}/>
+                    : <Avatar size={64} icon={<UserOutlined/>}/>}
                 <div className={s.description}>
                     <span className={s.descriptionTextName}><b>{props.profile.fullName}</b></span>
                     <ProfileStatus profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
-                    {/*<span className={s.descriptionText}><b>About me:</b> <i>{props.profile.}</i></span>*/}
                     <span
                         className={s.descriptionText}><b>Looking for a job:</b>{props.profile.lookingForAJob ? 'yes' : 'no'}</span>
                     <span
@@ -46,8 +50,9 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                     <span className={s.descriptionTextContacts}><b><i
                         className="fas fa-link">:</i></b>{props.profile.contacts.mainLink ? props.profile.contacts.mainLink : 'not specified'}</span>
                 </div>
-            </div>
-        </div>
+            </Content>
+
+        </Card>
     )
 }
 

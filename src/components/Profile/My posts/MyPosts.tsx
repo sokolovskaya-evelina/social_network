@@ -5,6 +5,8 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import Textarea from "../../common/FormsControls/FormsControls";
 import {postDataType} from "../../../types/types";
+import {Avatar, Button, Card, Form, Input} from "antd";
+import {Content} from "antd/es/layout/layout";
 
 type MyPostType = {
     addPost: (newPostText: string) => void
@@ -21,19 +23,21 @@ const MyPosts: FC<MyPostType> = (props) => {
     }
 
     return (
-        <div className={s.createPost}>
-            <div className={s.createPostHeader}>
+        <Content style={{width: '100%'}}>
+            <Card>
                 <h4 className={s.createPostTitle}>
                     Create Post
                 </h4>
-            </div>
-
-            <MyPostReduxForm onSubmit={addNewPostText}/>
-
-            <div>
+                <Avatar
+                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                    alt="Han Solo"
+                />
+                <MyPostReduxForm onSubmit={addNewPostText}/>
+            </Card>
+            <Content>
                 {postElements}
-            </div>
-        </div>
+            </Content>
+        </Content>
     )
 }
 
@@ -41,27 +45,27 @@ type MyPostsFormDataType = {
     newPostText: string
 }
 
-const maxLength10=maxLengthCreator(10)
+const maxLength10 = maxLengthCreator(10)
 
 const MyPostsForm: React.FC<InjectedFormProps<MyPostsFormDataType>> = (props) => {
     return (
-        <form onSubmit={props.handleSubmit} className={s.createPostBody}>
-            <div className={s.createPostInput}>
-                <Field
-                    className={s.createPostTextarea}
-                    component={Textarea}
-                    name={'newPostText'}
-                    placeholder={'Enter your message'}
-                    validate={[required, maxLength10]}
-                />
-            </div>
-            <div className={s.createPostFooter}>
-                <button className={s.tag}>
-                    <i className={"fas fa-location-arrow" + ' ' + s.tagIcon}/>
-                    Add post
-                </button>
-            </div>
-        </form>
+        <>
+            <form onSubmit={props.handleSubmit} >
+                <Form.Item>
+                    <Field
+                        component={Textarea}
+                        name={'newPostText'}
+                        placeholder={'Enter your message'}
+                        validate={[required, maxLength10]}
+                    />
+                </Form.Item>
+                <Form.Item>
+                    <Button htmlType="submit"  type="primary">
+                        Add post
+                    </Button>
+                </Form.Item>
+            </form>
+        </>
     );
 };
 

@@ -61,9 +61,9 @@
 
 .addMessageBtn {
     width: 50px;
-    border: 2px solid #9ED112FF;
+    border: 2px solid #000e40;
     border-radius: 50%;
-    color: #9ED112FF;
+    color: #000e40;
     margin-left: 10px;
 }
 .addMessageBtn:hover {
@@ -73,7 +73,7 @@
 .textarea{
     width: 60%;
     padding-top: 8px;
-    border: 2px solid #9ED112FF;
+    border: 2px solid #000e40;
     border-radius: 10px;
     resize: none;
     outline: none;

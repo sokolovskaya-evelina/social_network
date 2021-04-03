@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from "./ProfileInfo.module.css";
 import {ProfileInfoPropsType} from "./ProfileInfo";
+import {Input} from "antd";
 
 class ProfileStatus extends React.Component<ProfileInfoPropsType> {
     state = {
@@ -49,7 +50,7 @@ class ProfileStatus extends React.Component<ProfileInfoPropsType> {
                                 : 'Изменить статус'}
                         </span>}
                         {this.state.editMode &&
-                        <input className={s.statusInput} onChange={this.onStatusChange}
+                        <Input onChange={this.onStatusChange}
                                autoFocus={true}
                                onBlur={this.deactivateEditMode}
                                type="text"

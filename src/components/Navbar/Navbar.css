@@ -19,9 +19,3 @@
 .site-layout .site-layout-background {
     background: #fff;
 }
-
-.site-layout-background {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
