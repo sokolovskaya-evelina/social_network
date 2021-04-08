@@ -5,8 +5,10 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import Textarea from "../../common/FormsControls/FormsControls";
 import {postDataType} from "../../../types/types";
-import {Avatar, Button, Card, Form, Input} from "antd";
 import {Content} from "antd/es/layout/layout";
+import Dop from "../../../Dop";
+import {Comment, Avatar, Form, Button, List, Input, Card} from 'antd';
+
 
 type MyPostType = {
     addPost: (newPostText: string) => void
@@ -24,18 +26,12 @@ const MyPosts: FC<MyPostType> = (props) => {
 
     return (
         <Content style={{width: '100%'}}>
-            <Card>
-                <h4 className={s.createPostTitle}>
-                    Create Post
-                </h4>
-                <Avatar
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                    alt="Han Solo"
-                />
+            <Card title="Create Post">
                 <MyPostReduxForm onSubmit={addNewPostText}/>
             </Card>
             <Content>
                 {postElements}
+                <Dop/>
             </Content>
         </Content>
     )

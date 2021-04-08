@@ -28,8 +28,6 @@ class ProfileStatus extends React.Component<ProfileInfoPropsType> {
         this.props.updateStatus(this.state.status)
     }
 
-
-
     componentDidUpdate(prevProps: Readonly<ProfileInfoPropsType>, prevState: Readonly<any>) {
         if (prevProps.status !== this.props.status) {
             this.setState({

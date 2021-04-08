@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Post.module.css';
+import {Card} from "antd";
 
 type MessageType = {
     massage: string,
@@ -10,7 +11,7 @@ type MessageType = {
 
 const Post: React.FC<MessageType> = (props) => {
     return (
-            <div className={s.post}>
+            <Card>
                 <div className={s.postHeader}>
                     <div className={s.user}>
                         <img src={'https://static10.tgstat.ru/channels/_0/34/340648ab5ac20fe131ac165c13a6c5d5.jpg'}
@@ -36,7 +37,7 @@ const Post: React.FC<MessageType> = (props) => {
                     <button className={s.postButton}><i className={"far fa-comment" + " "+ s.buttonIcon} />Comment</button>
                     <button className={s.postButton}><i className={"fas fa-share-alt" + " "+ s.buttonIcon} />Share</button>
                 </div>
-            </div>
+            </Card>
     )
 }
 

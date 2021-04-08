@@ -6,6 +6,7 @@ import {ProfileType} from "../../../../types/types";
 import {Avatar, Card, Image} from "antd";
 import {Content} from "antd/es/layout/layout";
 import {UserOutlined} from "@ant-design/icons";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 export type ProfileInfoPropsType = {
     profile: ProfileType
@@ -21,13 +22,12 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         <Card style={{width: '100%',}}>
 
             <Content style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-
                 {props.profile.photos.large
-                    ? <Image height={'100%'} src={props.profile.photos.large}/>
+                    ? <Image style={{minWidth: '100px'}} height={'100%'} src={props.profile.photos.large}/>
                     : <Avatar size={64} icon={<UserOutlined/>}/>}
                 <div className={s.description}>
                     <span className={s.descriptionTextName}><b>{props.profile.fullName}</b></span>
-                    <ProfileStatus profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+                    <ProfileStatusWithHooks profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
                     <span
                         className={s.descriptionText}><b>Looking for a job:</b>{props.profile.lookingForAJob ? 'yes' : 'no'}</span>
                     <span
