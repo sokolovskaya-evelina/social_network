@@ -3,7 +3,6 @@ import s from "./ProfileInfo.module.css";
 import {ProfileInfoPropsType} from "./ProfileInfo";
 import {Input} from "antd";
 
-
 const ProfileStatusWithHooks = (props: ProfileInfoPropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.status)
@@ -22,6 +21,7 @@ const ProfileStatusWithHooks = (props: ProfileInfoPropsType) => {
         setEditMode(false)
         props.updateStatus(status)
     }
+
         return (
         <div>
             <div className={s.description}>

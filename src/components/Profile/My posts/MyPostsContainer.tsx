@@ -1,8 +1,8 @@
 import React from 'react';
-import {addPostActionCreator} from "../../../redux/profile_reducer";
+import {addPostActionCreator, deletePost} from "../../../redux/profile_reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {reduxStoreType} from "../../../redux/redux_store";
+import {Dispatch} from "redux";
 
 
 //TODO типизация
@@ -14,11 +14,14 @@ let mapStateToProps = (state: any) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         addPost: (newPostText: string) => {
             dispatch(addPostActionCreator(newPostText))
         },
+        deletePost: (id: number) => {
+            dispatch(deletePost(id))
+        }
     }
 }
 

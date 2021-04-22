@@ -10,7 +10,7 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
-type initialStateType = typeof initialState
+export type userInitialStateType = typeof initialState
 export type DispatchType = Dispatch<ActionsTypes>
 export type ActionsTypes =
     ReturnType<typeof followSuccess>
@@ -27,10 +27,10 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [] as Array<number>, //Array of user IDs
+    followingInProgress: [] as Array<number>
 }
 
-const UsersReducer = (state = initialState, action: ActionsTypes): initialStateType => {
+const UsersReducer = (state = initialState, action: ActionsTypes): userInitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {

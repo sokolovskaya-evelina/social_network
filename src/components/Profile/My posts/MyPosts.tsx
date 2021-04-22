@@ -1,25 +1,27 @@
 import React, {FC} from 'react';
-import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import Textarea from "../../common/FormsControls/FormsControls";
 import {postDataType} from "../../../types/types";
 import {Content} from "antd/es/layout/layout";
-import Dop from "../../../Dop";
-import {Comment, Avatar, Form, Button, List, Input, Card} from 'antd';
-
+import {Button, Card, Form} from 'antd';
 
 type MyPostType = {
     addPost: (newPostText: string) => void
+    deletePost: (id: number) => void
     posts: Array<postDataType>
     newPostText: string
 }
 
-//TODO сделать отступы между постами нормально
-const MyPosts: FC<MyPostType> = (props) => {
-    let postElements = props.posts.map(post => <Post massage={post.post} likeCount={post.likeCount}/>)
-
+const MyPosts: FC<MyPostType> = React.memo((props) => {
+    let postElements = props.posts.map((post, index) =>
+        <Post key={`${index}_${post.id}`}
+              massage={post.post}
+              likeCount={post.likeCount}
+              deletePost={props.deletePost}
+              id={post.id}
+        />)
     let addNewPostText = (value: MyPostsFormDataType) => {
         props.addPost(value.newPostText)
     }
@@ -31,32 +33,31 @@ const MyPosts: FC<MyPostType> = (props) => {
             </Card>
             <Content>
                 {postElements}
-                <Dop/>
             </Content>
         </Content>
     )
-}
+})
 
 type MyPostsFormDataType = {
     newPostText: string
 }
 
-const maxLength10 = maxLengthCreator(10)
+const maxLength50 = maxLengthCreator(50)
 
 const MyPostsForm: React.FC<InjectedFormProps<MyPostsFormDataType>> = (props) => {
     return (
         <>
-            <form onSubmit={props.handleSubmit} >
+            <form onSubmit={props.handleSubmit}>
                 <Form.Item>
                     <Field
                         component={Textarea}
                         name={'newPostText'}
                         placeholder={'Enter your message'}
-                        validate={[required, maxLength10]}
+                        validate={[required, maxLength50]}
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType="submit"  type="primary">
+                    <Button htmlType="submit" type="primary">
                         Add post
                     </Button>
                 </Form.Item>

@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import {Route, withRouter} from "react-router-dom"
+import {NavLink, Route, withRouter} from "react-router-dom"
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import {connect} from "react-redux";
 import {compose} from "redux";
@@ -16,13 +16,13 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import 'antd/dist/antd.css';
-import {Input, Layout } from 'antd';
+import {Input, Layout, Menu} from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
     UserOutlined,
     VideoCameraOutlined,
-    UploadOutlined,
+    UploadOutlined, ProfileOutlined, MessageOutlined, ReadOutlined, CustomerServiceOutlined, SettingOutlined,
 } from '@ant-design/icons';
 import Navbar from "./components/Navbar/Navbar";
 const { Header, Sider, Content } = Layout;
@@ -63,7 +63,6 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                             className: 'trigger',
                             onClick: this.toggle,
                         })}
-                        <Input.Search style={{maxWidth: '200px'}} size="large" placeholder="input here" enterButton />
                         <HeaderContainer/>
                     </Header>
                     <Content
@@ -74,7 +73,8 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                             alignItems: 'flex-start',
                             margin: '24px 16px',
                             padding: 24,
-                            minHeight: 280,
+                            minHeight: '100vh',
+                            height: '100%'
                         }}
                     >
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>

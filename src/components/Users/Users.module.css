@@ -1,13 +1,6 @@
 
 .userBlock {
-    display: flex;
 
-    width: 400px;
-
-    background: #FFFFFF;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    margin: 20px 0;
 }
 
 .paginationBlock{
@@ -70,13 +63,14 @@
 
     font-weight: normal;
     font-size: 14px;
-    line-height: 15px;
+    line-height: 20px;
     color: #595959;
     padding: 0 15px;
+    margin-top: 10px;
 }
 
 .userPhoto {
-    border-radius: 5px;
+    border-radius: 50%;
     width: 100px;
     padding-bottom: 6px;
 }

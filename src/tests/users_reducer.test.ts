@@ -1,23 +1,31 @@
 import UsersReducer, {
     followSuccess,
     setCurrentPages,
-    setTotalUsersCount,
-    setUsers,
-    toggleInFetching, toggleIsFollowingProgress, unFollowSuccess
+    setTotalUsersCount, setUsers,
+    toggleInFetching, toggleIsFollowingProgress, unFollowSuccess,
+    userInitialStateType
 } from "../redux/users_reducer";
 
-let startState = {}
+let startState = {} as userInitialStateType
 beforeEach(() => {
     startState = {
-        users: [
-            {userID: 2, followed: false},
-            {userID: 3, followed: true}
-        ],
         pageSize: 100,
         totalUsersCount: 0,
         currentPage: 1,
         isFetching: true,
         followingInProgress: [],
+        users: [
+            {
+                id: 1,
+                name: 'string',
+                status: 'string',
+                photos: {
+                    small: 'xl',
+                    large: null
+                },
+                followed: false
+            }
+        ]
     }
 })
 
@@ -43,32 +51,18 @@ test('toggle is fetching should be update', () => {
 })
 
 //TODO спросить про эти тесты
-/*test('follow should be true', () => {
-    const action = followAC(0)
+test('follow should be true', () => {
+    const action = followSuccess(1)
     const endState = UsersReducer(startState, action)
 
     expect(endState.users[0].followed).toBeTruthy()
 })
 
 test('follow should be false', () => {
-    const action = unFollowAC(2)
+    const action = unFollowSuccess(1)
     const endState = UsersReducer(startState, action)
 
-    expect(endState.users[1].followed).toBe(false)
-})*/
-/*
-test('user should be set', () => {
-    const action = setUsersAC(1)
-    const endState = UsersReducer(startState, action)
-
-    expect(endState).not.toEqual(startState)
+    expect(endState.users[0].followed).toBeFalsy()
 })
-
-test('', () => {
-    const action = toggleIsFollowingProgressAC(false, 5)
-    const endState = UsersReducer(startState,action)
-
-    expect(endState).not.toEqual(startState)
-})*/
 
 

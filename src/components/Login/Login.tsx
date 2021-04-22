@@ -1,12 +1,13 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {InputControl} from "../common/FormsControls/FormsControls";
+import {CheckboxControl, InputControl} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {loginUser} from "../../redux/auth_reducer";
 import {Redirect} from "react-router-dom";
 import s from './../common/FormsControls/FormsControls.module.css'
 import {reduxStoreType} from "../../redux/redux_store";
+import {Button} from "antd";
 
 type FormDataType = {
     email: string
@@ -18,25 +19,31 @@ type FormDataType = {
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'Email'} name={'email'} component={InputControl} validate={[required, ]}/>
-            </div>
-            <div>
-                <Field placeholder={'password'} name={'password'} component={InputControl} validate={[required, ]} type={'password'}/>
-            </div>
-            <div>
-                <Field type="checkbox" name={'rememberMe'} component={InputControl}/> <span>Remember me</span>
-            </div>
+            <Field className={s.form__item}
+                   placeholder={'Email'}
+                   name={'email'}
+                   component={InputControl}
+                   validate={[required,]}
+            />
+            <Field className={s.form__item}
+                   placeholder={'password'}
+                   name={'password'}
+                   component={InputControl}
+                   validate={[required,]}
+                   type={'password'}
+            />
+            <Field className={s.form__item}
+                   type="checkbox"
+                   name={'rememberMe'}
+                   component={CheckboxControl}
+            />
             {props.error && <div className={s.form_summary_error}>{props.error}</div>}
-            <div>
-                <button>Login</button>
-            </div>
+            <Button style={{marginTop: '15px'}} htmlType="submit" type={'primary'}>Login</Button>
         </form>
     );
 };
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
-
 
 
 const Login = (props: any) => {
@@ -49,14 +56,14 @@ const Login = (props: any) => {
     }
 
     return (
-        <div>
+        <div className={s.form__container}>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
     );
 };
 
-const mapStateToProps =(state: reduxStoreType) =>({
+const mapStateToProps = (state: reduxStoreType) => ({
     isAuth: state.auth.isAuth
 })
 

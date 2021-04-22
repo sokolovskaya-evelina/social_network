@@ -1,43 +1,47 @@
 import React from 'react';
 import s from './Post.module.css';
-import {Card} from "antd";
+import {Avatar, Button, Card} from "antd";
+import {CloseOutlined, CommentOutlined, LikeOutlined, ShareAltOutlined, UserOutlined} from "@ant-design/icons";
+import {NavLink} from "react-router-dom";
+
 
 type MessageType = {
-    massage: string,
+    massage: string
     likeCount: number
+    deletePost: (id: number) => void
+    id: number
 }
 
-//TODO сделать отступы между постами
+const buttonStyle = {
+    border: 'none',
+    marginTop: '15px',
+    fontSize: '14px',
+}
 
 const Post: React.FC<MessageType> = (props) => {
+    let deletePost = () => {
+        props.deletePost(props.id)
+    }
     return (
-            <Card>
-                <div className={s.postHeader}>
-                    <div className={s.user}>
-                        <img src={'https://static10.tgstat.ru/channels/_0/34/340648ab5ac20fe131ac165c13a6c5d5.jpg'}
-                             className={s.userAvatar}/>
-                        <div className={s.postInfo}>
-                            <a href="#" className={s.postAuthor}>Alisa Grey</a>
-                            <div className={s.postTimeInfo}>
-                                <span className={s.postTime}>3 hrs</span>
-                                <span className={"fas fa-cog" + ' ' + s.settingIcon}/>
-                            </div>
-                        </div>
+        <Card style={{marginBottom: '15px', marginTop: '15px'}}>
+            <div className={s.postHeader}>
+                <div className={s.user}>
+                    <Avatar className={s.userAvatar} size={'large'} icon={<UserOutlined/>}/>
+                    <div className={s.postInfo}>
+                        <NavLink to={'/profile'} className={s.postAuthor}>User</NavLink>
                     </div>
-                    <button className={'fas fa-ellipsis-h' + ' ' + s.postButton}/>
                 </div>
-                <div className={s.postContainer}>
-                    <p className={s.postText}>{props.massage}</p>
-                </div>
-                <div className={"far fa-thumbs-up"+' '+s.likes}>
-                    <span className={s.likesCounter}>{props.likeCount}</span>
-                </div>
-                <div className={s.postFooter}>
-                    <button className={s.postButton}><i className={"far fa-thumbs-up" + " "+ s.buttonIcon} />Like</button>
-                    <button className={s.postButton}><i className={"far fa-comment" + " "+ s.buttonIcon} />Comment</button>
-                    <button className={s.postButton}><i className={"fas fa-share-alt" + " "+ s.buttonIcon} />Share</button>
-                </div>
-            </Card>
+                <Button htmlType={'button'} onClick={deletePost} style={buttonStyle} type={'dashed'} icon={<CloseOutlined/>}/>
+            </div>
+            <div className={s.postContainer}>
+                <p className={s.postText}>{props.massage}</p>
+            </div>
+            <div className={s.postFooter}>
+                <Button style={buttonStyle} type={'default'}>{props.likeCount} Like <LikeOutlined/></Button>
+                <Button style={buttonStyle} type={'default'} icon={<CommentOutlined/>}>Comment</Button>
+                <Button style={buttonStyle} type={'default'} icon={<ShareAltOutlined/>}>Share</Button>
+            </div>
+        </Card>
     )
 }
 

@@ -12,7 +12,7 @@ beforeEach(() => {
 })
 
 test('user should be auth', () => {
-    const action = setAuthUserData(1, 'sokolovskaya_evelina_2001@mail.ru', 'rn_lazuka',)
+    const action = setAuthUserData(1, 'sokolovskaya_evelina_2001@mail.ru', 'rn_lazuka', true)
     const endState = AuthReducer(startState, action)
 
     expect(endState.isAuth).toBe(true)

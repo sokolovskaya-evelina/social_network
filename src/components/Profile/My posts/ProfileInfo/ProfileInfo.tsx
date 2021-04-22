@@ -19,8 +19,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         return <Preloader/>
     }
     return (
-        <Card style={{width: '100%',}}>
-
+        <Card style={{width: '100%', marginBottom: '20px'}}>
             <Content style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
                 {props.profile.photos.large
                     ? <Image style={{minWidth: '100px'}} height={'100%'} src={props.profile.photos.large}/>

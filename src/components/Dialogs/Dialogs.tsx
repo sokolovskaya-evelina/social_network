@@ -6,6 +6,8 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import Textarea from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {dialogsDataType, dialogsPageType, messageDataType} from "../../types/types";
+import {Button} from "antd";
+import {SendOutlined} from "@ant-design/icons";
 
 type DialogItemType = {
     name: string
@@ -99,7 +101,7 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormDataType>> = (pro
                 placeholder={'Enter your message'}
                 validate={[required, maxLength100]}
             />
-            <button className={"far fa-paper-plane" + " " + s.addMessageBtn}/>
+            <Button style={{marginLeft: '15px', marginTop: '10px'}} type={"primary"} htmlType={"submit"} icon={<SendOutlined/>}/>
         </form>
     );
 };

@@ -8,12 +8,12 @@ export type HeaderPropsType = {
     logoutUser: () => void
 }
 
-//TODO сделать иконки на панели навигации
 export const Header: React.FC<any> = (props) => {
-    return (<>
+    return (
+        <>
             {props.isAuth ?
-                <span>{props.login} <Button type='primary' onClick={props.logoutUser}>Logout</Button></span>
-                : <NavLink to={'/login'}><Button type='primary' onClick={props.logoutUser}>Login</Button></NavLink>}
+                <span style={{fontWeight: 'bold'}}>{props.login} <Button style={{marginRight: '20px', marginLeft: '30px'}} type='primary' onClick={props.logoutUser}>Logout</Button></span>
+                : <NavLink to={'/login'}><Button style={{marginRight: '20px'}} type='primary' onClick={props.logoutUser}>Login</Button></NavLink>}
         </>
     )
 }

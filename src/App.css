@@ -19,6 +19,10 @@
 .site-layout .site-layout-background {
     background: #fff;
 }
+.site-layout-background {
+    /*min-height: 100vh;*/
+    height: 100%;
+}
 
 .site-layout-background {
     display: flex;
