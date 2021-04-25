@@ -1,13 +1,15 @@
 import axios from "axios";
 import {ProfileType, UserType} from "../types/types";
 
-export enum ResultCodeEnum  {
-    Success=0,
-    Error=1,
+export enum ResultCodeEnum {
+    Success = 0,
+    Error = 1,
 }
-export enum ResultCodeForCaptcha  {
-    CaptchaIsRequired=10
+
+export enum ResultCodeForCaptcha {
+    CaptchaIsRequired = 10
 }
+
 type MeResponseType = {
     data: {
         id: number
@@ -21,7 +23,7 @@ type LoginMeResponseType = {
     resultCode: ResultCodeEnum | ResultCodeForCaptcha
     messages: Array<string>
     data: {
-        userId:number
+        userId: number
     }
 }
 type commonResponseType = {
@@ -60,30 +62,30 @@ export const usersAPI = {
 export const profileAPI = {
     getProfile(userId: number = 2) {
         return instance.get<ProfileType>(`profile/${userId}`)
-            .then(res=>res.data)
+            .then(res => res.data)
     },
-    getStatus(userId: number){
+    getStatus(userId: number) {
         return instance.get<string>(`profile/status/${userId}`)
-            .then(res=>res.data)
+            .then(res => res.data)
     },
-    updateStatus(status: string){
+    updateStatus(status: string) {
         return instance.put<commonResponseType>(`profile/status`, {status: status})
-            .then(res=>res.data)
+            .then(res => res.data)
     }
 }
 
 export const authAPI = {
     me() {
         return instance.get<MeResponseType>(`auth/me`)
-            .then(res=>res.data)
+            .then(res => res.data)
     },
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post<LoginMeResponseType>(`auth/login`, {email, password, rememberMe})
-            .then(res=>res.data)
+            .then(res => res.data)
     },
     logout() {
         return instance.delete<LoginMeResponseType>(`auth/login`)
-            .then(res=>res.data)
+            .then(res => res.data)
     }
 }
 

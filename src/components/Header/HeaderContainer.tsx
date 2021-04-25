@@ -4,8 +4,6 @@ import {connect} from "react-redux";
 import {logoutUser} from "../../redux/auth_reducer";
 import {reduxStoreType} from "../../redux/redux_store";
 
-type MapPropsType = {}
-
 //TODO типизация
 class HeaderContainer extends React.Component<any, any> {
     render() {

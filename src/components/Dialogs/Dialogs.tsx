@@ -101,7 +101,9 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormDataType>> = (pro
                 placeholder={'Enter your message'}
                 validate={[required, maxLength100]}
             />
-            <Button style={{marginLeft: '15px', marginTop: '10px'}} type={"primary"} htmlType={"submit"} icon={<SendOutlined/>}/>
+            <Button style={{marginLeft: '15px', marginTop: '10px'}}
+                    type={"primary"} htmlType={"submit"}
+                    icon={<SendOutlined/>}/>
         </form>
     );
 };

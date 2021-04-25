@@ -1,7 +1,8 @@
-.form__container{
+.form__container {
     margin: 0 auto;
     text-align: center;
 }
+
 .form {
     display: flex;
     flex-direction: column;
@@ -9,6 +10,7 @@
     justify-content: center;
 
 }
+
 .button {
     width: 90px;
     height: 40px;
@@ -23,20 +25,24 @@
     transition: .3s;
     outline: inherit;
 }
-.button:hover {
-     background: #48aee2;
-     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
- }
 
-.form__item{
+.button:hover {
+    background: #48aee2;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.form__item {
     margin-bottom: 20px;
 }
+
 .form__item:nth-child(1) {
     margin-top: 20px;
 }
+
 .form__item:nth-last-child {
     margin-top: 20px;
 }
+
 .error input,
 .error textarea {
     border: 2px solid crimson;

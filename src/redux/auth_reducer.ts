@@ -1,7 +1,6 @@
 import {authAPI, ResultCodeEnum} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {Dispatch} from "redux";
-import {GetStateType} from "../types/types";
 
 const SET_USER_DATA = 'SET_USER_DATA'
 
@@ -34,35 +33,32 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
     } as const
 )
 
-export const getAuthUserData = () => (dispatch: Dispatch, getState: GetStateType) => {
-    return authAPI.me()
-        .then(response => {
-            if (response.resultCode === ResultCodeEnum.Success) {
-                let {id, email, login} = response.data
-                dispatch(setAuthUserData(id, email, login, true))
-            }
-        })
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.me()
+
+    if (response.resultCode === ResultCodeEnum.Success) {
+        let {id, email, login} = response.data
+        dispatch(setAuthUserData(id, email, login, true))
+    }
 }
 
-export const logoutUser = () => (dispatch: Dispatch, getState: GetStateType) => {
-    authAPI.logout()
-        .then(response => {
-            if (response.resultCode === ResultCodeEnum.Success) {
-                dispatch(setAuthUserData(null, null, null, false))
-            } else {
-                let message = response.messages.length > 0 ? response.messages[0] : 'Some Error'
-                dispatch(stopSubmit("login", {_error: message}))
-            }
-        })
+export const logoutUser = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.logout()
+
+    if (response.resultCode === ResultCodeEnum.Success) {
+        dispatch(setAuthUserData(null, null, null, false))
+    } else {
+        let message = response.messages.length > 0 ? response.messages[0] : 'Some Error'
+        dispatch(stopSubmit("login", {_error: message}))
+    }
 }
-//TODO типизация
-export const loginUser = (email: string, password: string, rememberMe: boolean) => (dispatch: any, getState: GetStateType) => {
-    authAPI.login(email,password,rememberMe)
-        .then(response => {
-            if (response.resultCode === ResultCodeEnum.Success) {
-                dispatch(getAuthUserData())
-            }
-        })
+
+export const loginUser = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch<any>) => {
+    let response = await authAPI.login(email, password, rememberMe)
+
+    if (response.resultCode === ResultCodeEnum.Success) {
+        dispatch(getAuthUserData())
+    }
 }
 
 export default AuthReducer

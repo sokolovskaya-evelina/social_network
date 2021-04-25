@@ -7,22 +7,22 @@ const ProfileStatusWithHooks = (props: ProfileInfoPropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.status)
 
-    useEffect(()=>{
+    useEffect(() => {
         setStatus(props.status)
     }, [props.status])
 
-    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) =>{
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value)
     }
-    const activateEditMode=()=>{
+    const activateEditMode = () => {
         setEditMode(true)
     }
-    const deactivateEditMode=()=>{
+    const deactivateEditMode = () => {
         setEditMode(false)
         props.updateStatus(status)
     }
 
-        return (
+    return (
         <div>
             <div className={s.description}>
                 <div>

@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
 import {getAuthUserData} from "./auth_reducer";
-import {GetStateType} from "../types/types";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
 
@@ -24,15 +23,12 @@ const appReducer = (state = initialState, action: ActionTypes): initialStateType
     }
 }
 
-export const initializedSuccess = () => ({
-        type: INITIALIZED_SUCCESS,
-    } as const
-)
+export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS} as const)
 
-export const initializeApp = () => (dispatch: Dispatch<any>, getState: GetStateType) => {
+export const initializeApp = () => (dispatch: Dispatch<any>) => {
     let promise = dispatch(getAuthUserData())
     Promise.all([promise])
-        .then(()=>{
+        .then(() => {
             dispatch(initializedSuccess())
         })
 }

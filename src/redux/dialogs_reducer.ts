@@ -1,11 +1,10 @@
 import {dialogsDataType, messageDataType} from "../types/types";
 
-const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_MESSAGE = "dialogs/ADD-MESSAGE";
 
 
 export type ActionsTypes = ReturnType<typeof addMessageAC>
 type initialStateType = typeof initialState
-
 
 let initialState = {
     dialogsData: [

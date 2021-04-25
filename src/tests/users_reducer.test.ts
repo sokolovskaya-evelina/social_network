@@ -1,8 +1,9 @@
 import UsersReducer, {
     followSuccess,
     setCurrentPages,
-    setTotalUsersCount, setUsers,
-    toggleInFetching, toggleIsFollowingProgress, unFollowSuccess,
+    setTotalUsersCount,
+    toggleInFetching,
+    unFollowSuccess,
     userInitialStateType
 } from "../redux/users_reducer";
 

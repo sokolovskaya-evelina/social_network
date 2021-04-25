@@ -31,7 +31,8 @@ const Post: React.FC<MessageType> = (props) => {
                         <NavLink to={'/profile'} className={s.postAuthor}>User</NavLink>
                     </div>
                 </div>
-                <Button htmlType={'button'} onClick={deletePost} style={buttonStyle} type={'dashed'} icon={<CloseOutlined/>}/>
+                <Button htmlType={'button'} onClick={deletePost} style={buttonStyle} type={'dashed'}
+                        icon={<CloseOutlined/>}/>
             </div>
             <div className={s.postContainer}>
                 <p className={s.postText}>{props.massage}</p>

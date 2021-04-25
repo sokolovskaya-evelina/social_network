@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {follow, getUsers, setCurrentPages, toggleIsFollowingProgress, unFollow,} from "../../redux/users_reducer";
 import Users from "./Users";
-import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {UserType} from "../../types/types";
@@ -15,6 +14,7 @@ import {
     getTotalUsersCount,
     getUsersPages
 } from "../../redux/users-selectors";
+import {Spin} from "antd";
 
 type MapStatePropsType = {
     currentValue: number
@@ -34,7 +34,8 @@ type UsersContainerPropsType = MapStatePropsType & MapDispatchPropsType
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentValue, this.props.pageSize)
+        const {currentValue,pageSize} =this.props
+        this.props.getUsers(currentValue, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
@@ -44,17 +45,18 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader/> : null}
-            <Users totalUsersCount={this.props.totalUsersCount}
-                   pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
-                   onPageChanged={this.onPageChanged}
-                   users={this.props.users}
-                   follow={this.props.follow}
-                   unfollow={this.props.unFollow}
-                //toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
-                   followingInProgress={this.props.followingInProgress}
-            />
+            <Spin spinning={this.props.isFetching}>
+                <Users totalUsersCount={this.props.totalUsersCount}
+                       pageSize={this.props.pageSize}
+                       currentPage={this.props.currentPage}
+                       onPageChanged={this.onPageChanged}
+                       users={this.props.users}
+                       follow={this.props.follow}
+                       unfollow={this.props.unFollow}
+                    //toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+                       followingInProgress={this.props.followingInProgress}
+                />
+            </Spin>
         </>
 
     }
