@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ProfileType, UserType} from "../types/types";
+import {PhotosType, ProfileType, UserType} from "../types/types";
 
 export enum ResultCodeEnum {
     Success = 0,
@@ -26,8 +26,8 @@ type LoginMeResponseType = {
         userId: number
     }
 }
-type commonResponseType = {
-    data: {}
+type commonResponseType<P = {}> = {
+    data: P
     resultCode: ResultCodeEnum
     messages: Array<string>
 }
@@ -37,6 +37,9 @@ type UserResponseType = {
     error: string
 }
 
+type SavePhotoResponseDataType = {
+    photos: PhotosType
+}
 
 const instance = axios.create({
     withCredentials: true,
@@ -55,7 +58,7 @@ export const usersAPI = {
         return instance.post<commonResponseType>(`follow/${id}`)
     },
     unfollow(id: number = 2) {
-        return instance.delete<commonResponseType>(`follow/${id}`)
+        return instance.delete<commonResponseType<SavePhotoResponseDataType>>(`follow/${id}`)
     },
 }
 
@@ -70,6 +73,16 @@ export const profileAPI = {
     },
     updateStatus(status: string) {
         return instance.put<commonResponseType>(`profile/status`, {status: status})
+            .then(res => res.data)
+    },
+    savePhoto(photoFile: File) {
+        const formData = new FormData()
+        formData.append('image', photoFile)
+        return instance.put<commonResponseType<PhotosType>>(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
             .then(res => res.data)
     }
 }

@@ -1,31 +1,51 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './ProfileInfo.module.css';
-import {ProfileType} from "../../../../types/types";
+import {ProfileType} from "../../../types/types";
 import {Avatar, Card, Image, Spin} from "antd";
 import {Content} from "antd/es/layout/layout";
 import {UserOutlined} from "@ant-design/icons";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 export type ProfileInfoPropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
+    isOwner: boolean
     status: string
+    savePhoto: (photo: File) => Promise<any>
     updateStatus: (status: string) => void
 }
 
-const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus}) => {
+const styles = {
+    cardStyle: {
+        width: '100%',
+        marginBottom: '20px'
+    },
+    userAvatar: {
+        minWidth: '100px',
+        height: '100%'
+    },
+}
+
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, savePhoto}) => {
     if (!profile) {
         return <Spin/>
     }
+
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
+    }
     return (
-        <Card style={{width: '100%', marginBottom: '20px'}}>
+        <Card style={styles.cardStyle}>
             <Content style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
                 {profile.photos.large
-                    ? <Image style={{minWidth: '100px'}} height={'100%'} src={profile.photos.large}/>
+                    ? <Image style={styles.userAvatar} height={'100%'} src={profile.photos.large}/>
                     : <Avatar size={64} icon={<UserOutlined/>}/>}
                 <div className={s.description}>
                     <span className={s.descriptionTextName}><b>{profile.fullName}</b></span>
                     <ProfileStatusWithHooks profile={profile} status={status}
                                             updateStatus={updateStatus}/>
+                    {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
                     <span
                         className={s.descriptionText}><b>Looking for a job:</b>{profile.lookingForAJob ? 'yes' : 'no'}</span>
                     <span

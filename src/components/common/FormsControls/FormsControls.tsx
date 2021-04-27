@@ -46,9 +46,9 @@ export function createField<FormKeysType extends string>(placeholder: string | u
                                                          name: FormKeysType,
                                                          validators: Array<FieldValidatorType>,
                                                          component: FC<WrappedFieldProps>,
-                                                         props = {},) {
+                                                         props = {}) {
     return <div className={s.form__item}> <Field name={name} component={component} placeholder={placeholder}
-               validate={validators} {...props}/> </div>
+                                                 validate={validators} {...props}/> </div>
 }
 
 

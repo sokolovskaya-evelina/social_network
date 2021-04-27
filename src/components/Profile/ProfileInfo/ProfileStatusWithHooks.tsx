@@ -1,9 +1,15 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from "./ProfileInfo.module.css";
-import {ProfileInfoPropsType} from "./ProfileInfo";
 import {Input} from "antd";
+import {ProfileType} from "../../../types/types";
 
-const ProfileStatusWithHooks = (props: ProfileInfoPropsType) => {
+export type ProfileStatusPropsType = {
+    profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
+}
+
+const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.status)
 

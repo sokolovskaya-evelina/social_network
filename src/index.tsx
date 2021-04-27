@@ -1,23 +1,14 @@
 import React from 'react';
 import './index.css';
-import {BrowserRouter} from "react-router-dom";
 import store from "./redux/redux_store";
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import SocialNetworkApp from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from "react-redux";
 
 const rerenderEntireTree = () => {
     ReactDOM.render(
-        <React.StrictMode>
-            <BrowserRouter>
-                <Provider store={store}>
-                    <App />
-                </Provider>
-            </BrowserRouter>
-        </React.StrictMode>,
+        <SocialNetworkApp/>,
         document.getElementById('root')
     );
 }

@@ -52,12 +52,13 @@ export const logoutUser = () => async (dispatch: Dispatch) => {
         dispatch(stopSubmit("login", {_error: message}))
     }
 }
-
-export const loginUser = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch<any>) => {
+export const loginUser = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
     let response = await authAPI.login(email, password, rememberMe)
-
     if (response.resultCode === ResultCodeEnum.Success) {
         dispatch(getAuthUserData())
+    } else {
+        let message = response.messages.length > 0 ? response.messages[0] : 'Some Error'
+        dispatch(stopSubmit("login", {_error: message}))
     }
 }
 

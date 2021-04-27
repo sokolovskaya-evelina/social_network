@@ -1,8 +1,7 @@
 import React from 'react';
-import {UserType} from "../../../types/types";
 import {Pagination} from "antd";
 
-type UsersPropsType = {
+type PaginatorPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
@@ -10,7 +9,7 @@ type UsersPropsType = {
 
 }
 
-const Paginator: React.FC<UsersPropsType> = ({totalUsersCount,pageSize,onPageChanged,currentPage}) => {
+const Paginator: React.FC<PaginatorPropsType> = ({totalUsersCount, onPageChanged}) => {
     return (
         <Pagination
             total={totalUsersCount | 1}

@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.css';
-import {Route, withRouter} from "react-router-dom"
+import {HashRouter, Route, withRouter, Switch, Redirect} from "react-router-dom"
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app_reducer";
-import {reduxStoreType} from "./redux/redux_store";
+import store, {reduxStoreType} from "./redux/redux_store";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -15,7 +15,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import 'antd/dist/antd.css';
-import {Layout, Spin} from 'antd';
+import {Layout, Spin,} from 'antd';
 import {MenuFoldOutlined, MenuUnfoldOutlined,} from '@ant-design/icons';
 import Navbar from "./components/Navbar/Navbar";
 
@@ -69,14 +69,19 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                 height: '100%'
                             }}
                         >
-                            <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                            <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                            <Route path='/users' render={() => <UsersContainer/>}/>
-                            <Route path='/login' render={() => <Login/>}/>
-                            <Route path='/news' render={() => <News/>}/>
-                            <Route path='/music' render={() => <Music/>}/>
-                            <Route path='/settings' render={() => <Settings/>}/>
-                        </Content>
+                            <React.Suspense fallback={<Spin/>}>
+                                <Switch>
+                                    <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+                                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                                    <Route path='/users' render={() => <UsersContainer/>}/>
+                                    <Route path='/login' render={() => <Login/>}/>
+                                    <Route path='/news' render={() => <News/>}/>
+                                    <Route path='/music' render={() => <Music/>}/>
+                                    <Route path='/settings' render={() => <Settings/>}/>
+                                </Switch>
+                            </React.Suspense>
+                            </Content>
                     </Layout>
                 </Layout>
             </Spin>
@@ -88,7 +93,19 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
 const mapStateToProps = (state: reduxStoreType) => ({
     initialized: state.app.initialized
 })
-export default compose<React.ComponentType>(
+let AppContainer = compose<React.ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))
 (App);
+
+const SocialNetworkApp = () => {
+    return <React.StrictMode>
+        <HashRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </HashRouter>
+    </React.StrictMode>
+}
+
+export default SocialNetworkApp
