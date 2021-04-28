@@ -99,13 +99,11 @@ let AppContainer = compose<React.ComponentType>(
 (App);
 
 const SocialNetworkApp = () => {
-    return <React.StrictMode>
-        <HashRouter>
+    return <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
         </HashRouter>
-    </React.StrictMode>
 }
 
 export default SocialNetworkApp

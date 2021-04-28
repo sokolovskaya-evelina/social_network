@@ -84,6 +84,10 @@ export const profileAPI = {
             }
         })
             .then(res => res.data)
+    },
+    saveProfile(profile: ProfileType) {
+        return instance.put <commonResponseType>(`profile`, profile)
+            .then(res => res.data)
     }
 }
 
@@ -92,13 +96,18 @@ export const authAPI = {
         return instance.get<MeResponseType>(`auth/me`)
             .then(res => res.data)
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post<LoginMeResponseType>(`auth/login`, {email, password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
+        return instance.post<LoginMeResponseType>(`auth/login`, {email, password, rememberMe, captcha})
             .then(res => res.data)
     },
     logout() {
         return instance.delete<LoginMeResponseType>(`auth/login`)
             .then(res => res.data)
+    }
+}
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get<{ url: string }>('/security/get-captcha-url')
     }
 }
 

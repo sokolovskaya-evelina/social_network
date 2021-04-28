@@ -37,9 +37,13 @@ export const InputControl: React.FC<WrappedFieldProps> = (props) => {
 };
 export const CheckboxControl: React.FC<WrappedFieldProps> = (props) => {
     const {input, meta, ...restProps} = props;
-    return <FormControl {...props}>
-        <Checkbox {...input} {...restProps}>Remember me</Checkbox>
+    return (
+        <span>
+        <FormControl {...props}>
+        <Checkbox  {...input} {...restProps}/>
     </FormControl>
+            </span>
+    )
 };
 
 export function createField<FormKeysType extends string>(placeholder: string | undefined,
@@ -47,8 +51,8 @@ export function createField<FormKeysType extends string>(placeholder: string | u
                                                          validators: Array<FieldValidatorType>,
                                                          component: FC<WrappedFieldProps>,
                                                          props = {}) {
-    return <div className={s.form__item}> <Field name={name} component={component} placeholder={placeholder}
-                                                 validate={validators} {...props}/> </div>
+    return <span className={s.form__item}> <Field name={name} component={component} placeholder={placeholder}
+                                                  validate={validators} {...props}/> </span>
 }
 
 
