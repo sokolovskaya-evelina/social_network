@@ -1,80 +1,159 @@
-.mainFeed {
-    margin-top: 18px;
-    max-width: 590px;
-    flex-grow: 1;
+.profile__container {
+    min-width: 500px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.descriptionBlock {
-    display: flex;
-
-    padding: 20px;
-    width: 1000px;
-
-    background: #FFFFFF;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    overflow: hidden;
+.profile__photo_block {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 50px;
 }
 
 .profileImage {
-    display: inline;
-    width: 100%;
-    max-width: 380px;
-    height: auto;
-    margin-right: 20px;
+    max-width: 320px;
+    max-height: 320px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
 }
+.upload_btn{
+    margin-top: 10px;
+}
+.custom_file_upload{
+    cursor: pointer;
+}
+input[type="file"] {
+    display: none;
+}
 
-.description {
+.status__description{
+    margin-top: 10px;
+    display: flex;
+    align-items: baseline;
+}
+.status__description__text{
+    margin-right: 10px;
+}
+
+.data__description{
     display: flex;
     flex-direction: column;
-    min-width: 320px;
-
+    min-width: 500px;
     color: #595959;
-    line-height: 22px;
-    font-size: 14px;
+}
 
+.data__description_full_name{
+    text-align: center;
+    font-size: 30px;
+}
+
+.descriptionText{
+    margin-bottom: 4px;
+}
+
+.descriptionTextContacts{
     margin-left: 15px;
+    margin-bottom: 2px;
+}
+
+.edit_btn{
+    align-self: center;
+}
+
+/*.form__description {
+    display: flex;
+    flex-direction: column;
+}*/
+/*.main_content{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+/*.mainFeed {*/
+/*    margin-top: 18px;*/
+/*    max-width: 590px;*/
+/*    flex-grow: 1;*/
+/*}*/
+
+/*.descriptionBlock {*/
+/*    display: flex;*/
+
+/*    padding: 20px;*/
+/*    width: 1000px;*/
+
+/*    background: #FFFFFF;*/
+/*    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);*/
+/*    border-radius: 4px;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.profileImage {*/
+/*    max-width: 320px;*/
+/*    width: 100%;*/
+/*    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);*/
+/*    border-radius: 4px;*/
+/*}*/
+
+
+/*.description {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    min-width: 320px;*/
+
+/*    color: #595959;*/
+/*    line-height: 22px;*/
+/*    font-size: 14px;*/
+
+/*    margin-left: 15px;*/
+/*}*/
+.form__description{
+    display: flex;
+    flex-direction: column;
+    color: #595959;
 }
 .descriptionTextDataForm {
     display: flex;
     align-items: baseline;
 }
-.descriptionTextName {
-    text-align: center;
+.descriptionTextName{
+    margin-right: 15px;
     margin-bottom: 15px;
-    margin-top: 10px;
-    text-transform: uppercase;
 }
-.contactsBlock{
-    display: flex;
-    flex-direction: column;
-}
+/*.descriptionTextName {*/
+/*    text-align: center;*/
+/*    margin-bottom: 15px;*/
+/*    margin-top: 10px;*/
+/*    text-transform: uppercase;*/
+/*}*/
+/*.contactsBlock{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
 
-b {
-    margin-right: 10px;
-}
+/*b {*/
+/*    margin-right: 10px;*/
+/*}*/
 
-.descriptionTextContacts {
-    margin-left: 70px;
-}
+/*.descriptionTextContacts {*/
+/*    margin-left: 70px;*/
+/*}*/
 
-.status {
-    font-style: italic;
-    font-weight: normal;
-}
+/*.status {*/
+/*    font-style: italic;*/
+/*    font-weight: normal;*/
+/*}*/
 
-.statusInput {
-    width: 300px;
-    font-size: 13px;
-    padding: 6px 0 4px 10px;
-    border: 1px solid #cecece;
-    background: #F6F6f6;
-    border-radius: 8px;
-}
-.form_summary_error{
-    border: 1px solid crimson;
-    padding: 5px;
-    color: #9ed112;
-}
+/*.statusInput {*/
+/*    width: 300px;*/
+/*    font-size: 13px;*/
+/*    padding: 6px 0 4px 10px;*/
+/*    border: 1px solid #cecece;*/
+/*    background: #F6F6f6;*/
+/*    border-radius: 8px;*/
+/*}*/
+/*.form_summary_error{*/
+/*    border: 1px solid crimson;*/
+/*    padding: 5px;*/
+/*    color: #9ed112;*/
+/*}*/

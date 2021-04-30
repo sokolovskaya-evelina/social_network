@@ -1,6 +1,11 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {Button} from "antd";
+import style from './Header.module.css'
+import {useDispatch, useSelector} from "react-redux";
+import {reduxStoreType} from "../../redux/redux_store";
+import {logoutUser} from "../../redux/auth_reducer";
+import userAvatar from './../../assets/user.png'
 
 export type HeaderPropsType = {
     login: string,
@@ -8,29 +13,37 @@ export type HeaderPropsType = {
     logoutUser: () => void
 }
 
-export const Header: React.FC<any> = (props) => {
+const HeaderComponent: React.FC = () => {
+    const isAuth = useSelector<reduxStoreType, boolean>(state => state.auth.isAuth)
+    const userPhoto = useSelector<reduxStoreType, string | null | undefined>(state => state.profilePage.profile?.photos.small)
+    const dispatch = useDispatch()
+
+    const logout = () => {
+        dispatch(logoutUser())
+    }
+
     return (
         <>
-            {props.isAuth
-                ? <span style={{fontWeight: 'bold'}}>
-                    {props.login}
-                    <Button style={{marginRight: '20px', marginLeft: '30px'}}
-                            type='primary'
-                            onClick={props.logoutUser}>
+            {isAuth
+                ? <div>
+                    <img src={userPhoto || userAvatar} alt='user avatar' className={style.userPhoto}/>
+                    <Button type='primary'
+                            onClick={logout}>
                         Logout
                     </Button>
-                </span>
-                : <NavLink to={'/login'}>
-                    <Button style={{marginRight: '20px'}}
-                            type='primary'
-                            onClick={props.logoutUser}>
+                </div>
+                :
+                <NavLink to={'/login'}>
+                    <Button type='primary'>
+
                         Login
                     </Button>
                 </NavLink>
+
             }
         </>
     )
 }
 
-export default Header;
+export default HeaderComponent;
 

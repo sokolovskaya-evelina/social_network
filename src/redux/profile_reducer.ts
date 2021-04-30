@@ -1,7 +1,7 @@
 import {profileAPI, ResultCodeEnum} from "../api/api";
 import {Dispatch} from "redux";
 import {PhotosType, PostType, ProfileType} from "../types/types";
-import {BaseThunkType, reduxStoreType} from "./redux_store";
+import {BaseThunkType} from "./redux_store";
 import {FormAction, stopSubmit} from "redux-form";
 
 const ADD_POST = 'profile/ADD-POST';
@@ -71,10 +71,15 @@ export const getStatus = (userId: number) => async (dispatch: DispatchType) => {
     dispatch(setStatus(response))
 }
 export const updateStatus = (status: string) => async (dispatch: DispatchType) => {
-    const response = await profileAPI.updateStatus(status)
-    if (response.resultCode === ResultCodeEnum.Success) {
-        dispatch(setStatus(status))
+    try {
+        const response = await profileAPI.updateStatus(status)
+        if (response.resultCode === ResultCodeEnum.Success) {
+            dispatch(setStatus(status))
+        }
+    } catch (error) {
+
     }
+
 }
 export const savePhoto = (file: File) => async (dispatch: DispatchType) => {
     const response = await profileAPI.savePhoto(file)
@@ -94,7 +99,7 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch,
             throw new Error("userId can't be null")
         }
     } else {
-        dispatch(stopSubmit("edit-profile", {_error: data.messages[0] }))
+        dispatch(stopSubmit("edit-profile", {_error: data.messages[0]}))
         return Promise.reject(data.messages[0])
     }
 }

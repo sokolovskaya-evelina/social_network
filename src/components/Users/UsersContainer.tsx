@@ -53,7 +53,6 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
                        users={this.props.users}
                        follow={this.props.follow}
                        unfollow={this.props.unFollow}
-                    //toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                        followingInProgress={this.props.followingInProgress}
                 />
             </Spin>
@@ -76,7 +75,7 @@ let mapStateToProps = (state: reduxStoreType) => {
 
 export default compose(
     withAuthRedirect,
-    connect/*<MapStatePropsType,MapDispatchPropsType, reduxStoreType>*/(mapStateToProps, {
+    connect(mapStateToProps, {
         follow,
         unFollow,
         setCurrentPages,

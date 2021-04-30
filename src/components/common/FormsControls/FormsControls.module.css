@@ -1,59 +1,9 @@
-.form__container {
-    margin: 0 auto;
-    text-align: center;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-
-}
-
-.button {
-    width: 90px;
-    height: 40px;
-    margin-top: 20px;
-
-    border: none;
-    border-radius: 3px;
-
-    background: #1487c2;
-    color: #ffffff;
-
-    transition: .3s;
-    outline: inherit;
-}
-
-.button:hover {
-    background: #48aee2;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-.form__item {
-    margin-bottom: 20px;
-}
-
-.form__item:nth-child(1) {
-    margin-top: 20px;
-}
-
-.form__item:nth-last-child {
-    margin-top: 20px;
-}
-
-.error input,
-.error textarea {
-    border: 2px solid crimson;
-}
-
-.error span {
-    color: crimson;
-}
-
 .form_summary_error {
     border: 1px solid crimson;
     padding: 5px;
     color: #9ed112;
+}
+.error {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

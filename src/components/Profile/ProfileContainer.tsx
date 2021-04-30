@@ -2,16 +2,29 @@ import React from 'react';
 import Profile from './Profile';
 import {connect} from "react-redux";
 import {getProfilePage, getStatus, savePhoto, saveProfile, updateStatus} from "../../redux/profile_reducer";
-import {withRouter} from 'react-router-dom';
+import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {compose} from "redux";
 import {reduxStoreType} from "../../redux/redux_store";
+import {ProfileType} from "../../types/types";
 
 
-//TODO типизация
-class ProfileContainer extends React.Component<any, any> {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+    getProfilePage: (userId: number) => void
+    getStatus: (userId: number) => void
+    updateStatus: (status: string)=>void
+    savePhoto: (file: File)=>void
+    saveProfile: (profile: ProfileType)=> Promise<any>
+}
+type PathParamsType = {
+    userId: string
+}
+type PropsType = MapPropsType & DispatchPropsType & RouteComponentProps<PathParamsType>;
+
+class ProfileContainer extends React.Component<PropsType> {
     refreshProfile() {
-        let userId = this.props.match.params.userId
+        let userId: number|null = +this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId;
             if (!userId) {
@@ -19,17 +32,21 @@ class ProfileContainer extends React.Component<any, any> {
             }
 
         }
-        this.props.getProfilePage(userId)
-        this.props.getStatus(userId)
+        if (!userId) {
+            console.error("ID should exists in URI params or in state ('authorizedUserId')");
+        } else {
+            this.props.getProfilePage(userId)
+            this.props.getStatus(userId)
+        }
     }
 
     componentDidMount() {
         this.refreshProfile()
     }
 
-    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
+    componentDidUpdate(prevProps: PropsType, prevState: PropsType) {
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
-            this.refreshProfile()
+            this.refreshProfile();
         }
     }
 

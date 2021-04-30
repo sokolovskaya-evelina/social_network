@@ -2,11 +2,21 @@ import React from 'react';
 import MyPostsContainer from "./My posts/MyPostsContainer"
 import {Spin} from "antd";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfileType} from "../../types/types";
+import s from './Profile.module.css'
 
+type PropsType = {
+    profile: ProfileType | null
+    isOwner: boolean
+    status: string
+    updateStatus: (status: string) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
+    savePhoto: (file: File) => void
+}
 
-const Profile = (props: any) => {
+const Profile = (props: PropsType) => {
     return (
-        <Spin spinning={!props.profile} style={{background: '#fff', width: '100%', height: '100%'}}>
+        <Spin spinning={!props.profile} className={s.spin}>
             <ProfileInfo savePhoto={props.savePhoto}
                          isOwner={props.isOwner}
                          profile={props.profile}

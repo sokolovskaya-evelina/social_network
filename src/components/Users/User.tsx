@@ -19,7 +19,7 @@ const styles = {
     }
 }
 
-const Users: React.FC<UsersPropsType> = ({user, followingInProgress, follow, unfollow}) => {
+const User: React.FC<UsersPropsType> = ({user, followingInProgress, follow, unfollow}) => {
     return (
         <div className={s.user}>
             <Card style={styles.userBlock} key={user.id}>
@@ -64,4 +64,4 @@ const Users: React.FC<UsersPropsType> = ({user, followingInProgress, follow, unf
     );
 };
 
-export default Users;
+export default User;

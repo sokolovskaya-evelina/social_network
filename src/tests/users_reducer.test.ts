@@ -51,7 +51,6 @@ test('toggle is fetching should be update', () => {
     expect(endState.isFetching).toBeFalsy()
 })
 
-//TODO спросить про эти тесты
 test('follow should be true', () => {
     const action = followSuccess(1)
     const endState = UsersReducer(startState, action)

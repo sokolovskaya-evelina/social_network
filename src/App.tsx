@@ -1,14 +1,11 @@
 import React from 'react'
 import './App.css';
-import {HashRouter, Route, withRouter, Switch, Redirect} from "react-router-dom"
+import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom"
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app_reducer";
 import store, {reduxStoreType} from "./redux/redux_store";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import Login from "./components/Login/Login";
 import {News} from "./components/News/News";
@@ -18,8 +15,19 @@ import 'antd/dist/antd.css';
 import {Layout, Spin,} from 'antd';
 import {MenuFoldOutlined, MenuUnfoldOutlined,} from '@ant-design/icons';
 import Navbar from "./components/Navbar/Navbar";
+import HeaderComponent from "./components/Header/Header";
 
 const {Header, Sider, Content} = Layout;
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+
+const styles = {
+    mainLayout: {
+        minHeight: '100vh',
+        height: '100%'
+    }
+}
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -27,48 +35,44 @@ type DispatchPropsType = {
 }
 
 class App extends React.Component<MapPropsType & DispatchPropsType> {
+    catchAllUnhandledErrors = () => {
+        alert('Some error occured')
+    }
+
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     state = {
         collapsed: false,
     };
-
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
-        });
-    };
+        })
+    }
 
     render() {
         return (
-            <Spin style={{background: '#fff', width: '100%', height: '100vh'}} spinning={!this.props.initialized}>
-                <Layout>
+            <Spin className='preloader' spinning={!this.props.initialized}>
+                <Layout className='main_layout' style={styles.mainLayout}>
                     <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-                        <div className="logo"/>
                         <Navbar/>
                     </Sider>
                     <Layout className="site-layout">
-                        <Header className="site-layout-background" style={{padding: 0}}>
+                        <Header style={{padding: '0 20px'}} className="site-layout-background">
                             {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                                 className: 'trigger',
                                 onClick: this.toggle,
                             })}
-                            <HeaderContainer/>
+                            <HeaderComponent/>
                         </Header>
-                        <Content
-                            className="site-layout-background"
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'flex-start',
-                                margin: '24px 16px',
-                                padding: 24,
-                                minHeight: '100vh',
-                                height: '100%'
-                            }}
-                        >
+                        <Content className='main_content'>
                             <React.Suspense fallback={<Spin/>}>
                                 <Switch>
                                     <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
@@ -79,9 +83,10 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                     <Route path='/news' render={() => <News/>}/>
                                     <Route path='/music' render={() => <Music/>}/>
                                     <Route path='/settings' render={() => <Settings/>}/>
+                                    <Route path='*' render={() => <h1>404 PAGE NOT FOUND</h1>}/>
                                 </Switch>
                             </React.Suspense>
-                            </Content>
+                        </Content>
                     </Layout>
                 </Layout>
             </Spin>
@@ -91,7 +96,8 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
 }
 
 const mapStateToProps = (state: reduxStoreType) => ({
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
+    photo: state.profilePage.profile?.photos.small
 })
 let AppContainer = compose<React.ComponentType>(
     withRouter,
@@ -100,10 +106,10 @@ let AppContainer = compose<React.ComponentType>(
 
 const SocialNetworkApp = () => {
     return <HashRouter>
-            <Provider store={store}>
-                <AppContainer/>
-            </Provider>
-        </HashRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </HashRouter>
 }
 
 export default SocialNetworkApp

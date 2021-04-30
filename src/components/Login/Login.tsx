@@ -5,9 +5,10 @@ import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {loginUser} from "../../redux/auth_reducer";
 import {Redirect} from "react-router-dom";
-import s from './../common/FormsControls/FormsControls.module.css'
+import s from './Login.module.css'
 import {reduxStoreType} from "../../redux/redux_store";
-import {Alert, Button} from "antd";
+import {Button, message} from "antd";
+import {Content} from "antd/es/layout/layout";
 
 type FormDataType = {
     email: string
@@ -16,18 +17,31 @@ type FormDataType = {
     captcha: string | null
 }
 
-
 const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormOwnProps> & LoginFormOwnProps> =
     ({handleSubmit, captchaUrl, error}) => {
+        const onError = () => {
+            if (error) {
+                return message.error(error)
+            }
+        }
         return (
-            <form onSubmit={handleSubmit}>
-                {createField('Email', 'email', [required,], InputControl)}
-                {createField('Password', 'password', [required,], InputControl, {type: 'password'})}
-                {createField(undefined, 'rememberMe', [], CheckboxControl, {type: 'checkbox'})}
+            <form className={s.form} onSubmit={handleSubmit}>
+                <div className={s.form__input}>
+                    {createField('Email', 'email', [required,], InputControl)}
+                </div>
+                <div className={s.form__input}>
+                    {createField('Password', 'password', [required,], InputControl, {type: 'password'})}
+                </div>
+                <div className={s.form__checkbox}>
+                    {createField(undefined, 'rememberMe', [], CheckboxControl, {type: 'checkbox'})}
+                    <span className={s.form__checkbox__text}>Remember me</span>
+                </div>
                 {captchaUrl && <img src={captchaUrl} alt='captcha'/>}
-                {captchaUrl && createField('Symbols from image', 'captcha', [], InputControl)}
-                {error && <Alert message={error} type="error" showIcon closable/>}
-                <Button style={{marginTop: '15px'}} htmlType="submit" type={'primary'}>Login</Button>
+                <div className={s.form__input}>
+                    {captchaUrl && createField('Symbols from image', 'captcha', [], InputControl)}
+                </div>
+
+                <Button onClick={onError} className={s.form__button} htmlType="submit" type={'primary'}>Login</Button>
             </form>
         );
     };
@@ -47,10 +61,10 @@ const Login = (props: any) => {
     }
 
     return (
-        <div className={s.form__container}>
+        <Content className={s.form__container}>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
-        </div>
+        </Content>
     );
 };
 

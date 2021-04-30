@@ -1,17 +1,19 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
-import {ContactsType, ProfileType} from "../../../types/types";
-import {Avatar, Button, Card, Image, Spin} from "antd";
+import {ProfileType} from "../../../types/types";
+import {Button, Card, Image, Spin} from "antd";
 import {Content} from "antd/es/layout/layout";
-import {UserOutlined} from "@ant-design/icons";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import ProfileDataForm from "./ProfileDataForm";
+import {ProfileData} from "./ProfileData";
+import userAvatar from './../../../assets/user.png'
+import {UploadOutlined} from "@ant-design/icons";
 
 export type ProfileInfoPropsType = {
     profile: ProfileType | null
     isOwner: boolean
     status: string
-    savePhoto: (photo: File) => Promise<any>
+    savePhoto: (photo: File) => void
     updateStatus: (status: string) => void
     saveProfile: (formData: ProfileType) => Promise<any>
 }
@@ -20,10 +22,6 @@ const styles = {
     cardStyle: {
         width: '100%',
         marginBottom: '20px'
-    },
-    userAvatar: {
-        minWidth: '100px',
-        height: '100%'
     },
 }
 
@@ -45,72 +43,39 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> =
                     setEditMode(false)
                 })
         }
-
         return (
             <Card style={styles.cardStyle}>
-                <Content style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-                    {profile.photos.large
-                        ? <Image style={styles.userAvatar} height={'100%'} src={profile.photos.large}/>
-                        : <Avatar size={64} icon={<UserOutlined/>}/>}
-                    {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                    <ProfileStatusWithHooks profile={profile} status={status}
-                                            updateStatus={updateStatus}/>
-                    {editMode
-                        ? <ProfileDataForm initialValues={profile}
-                                           onSubmit={onSubmit}
-                                           profile={profile}
-                        />
-                        : <ProfileData profile={profile}
-                                       isOwner={isOwner}
-                                       goToEditMode={() => setEditMode(true)}/>}
+                <Content className={s.profile__container}>
+                    <div className={s.profile__photo_block}>
+                        {profile.photos.large
+                            ? <Image className={s.profileImage} src={profile.photos.large}/>
+                            : <Image className={s.profileImage} src={userAvatar}/>}
+                        <ProfileStatusWithHooks profile={profile} status={status}
+                                                updateStatus={updateStatus}/>
+                        {isOwner && <Button type={'primary'} className={s.upload_btn}>
+                            <label className={s.custom_file_upload}>
+                                <UploadOutlined/>
+                                <input type={'file'} className={s.input_file} onChange={onMainPhotoSelected}/>
+                                Upload photo
+                            </label>
+                        </Button>
+                        }
+                    </div>
+                    <div>
+
+                        {editMode
+                            ? <ProfileDataForm initialValues={profile}
+                                               onSubmit={onSubmit}
+                                               profile={profile}
+                            />
+                            : <ProfileData profile={profile}
+                                           isOwner={isOwner}
+                                           goToEditMode={() => setEditMode(true)}/>}
+                    </div>
                 </Content>
             </Card>
         )
     }
-
-
-type ProfileDataType = {
-    profile: ProfileType
-    isOwner: boolean
-    goToEditMode: () => void
-}
-
-const ProfileData: React.FC<ProfileDataType> = ({profile, isOwner, goToEditMode}) => {
-    return (
-        <div className={s.description}>
-                    <span className={s.descriptionTextName}>
-                        <b>{profile.fullName}</b>
-                    </span>
-
-            <span className={s.descriptionText}>
-                        <b>Looking for a job:</b>
-                {profile.lookingForAJob ? 'yes' : 'no'}
-                    </span>
-            <span className={s.descriptionText}>
-                        <b>My professional skills:</b>
-                {profile.lookingForAJobDescription}
-                    </span>
-            <span className={s.descriptionText}>
-                        <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
-                return <Contact key={key} contactTitle={key}
-                                contactValue={profile.contacts[key as keyof ContactsType]}/>
-            })}
-                    </span>
-            {isOwner && <Button htmlType={'button'} type={'primary'} onClick={goToEditMode}>Edit</Button>}
-        </div>
-    )
-}
-
-type ContactType = {
-    contactTitle: string
-    contactValue: string
-}
-const Contact: React.FC<ContactType> = ({contactTitle, contactValue}) => {
-    return (<div className={s.descriptionTextContacts}>
-            <b>{contactTitle}: </b>{contactValue ? contactValue : <i>not specified</i>}</div>
-    )
-}
-
 export default ProfileInfo;
 
 
