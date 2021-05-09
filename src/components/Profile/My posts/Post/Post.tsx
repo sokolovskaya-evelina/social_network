@@ -8,8 +8,8 @@ import {NavLink} from "react-router-dom";
 type MessageType = {
     massage: string
     likeCount: number
-    deletePost: (id: number) => void
-    id: number
+    deletePost: (id: string) => void
+    id: string
 }
 
 const buttonStyle = {

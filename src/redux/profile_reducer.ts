@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {PhotosType, PostType, ProfileType} from "../types/types";
 import {BaseThunkType} from "./redux_store";
 import {FormAction, stopSubmit} from "redux-form";
+import {v1} from 'uuid';
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = "profile/SET-USER-PROFILE";
@@ -24,8 +25,8 @@ type ThunkType = BaseThunkType<ActionsTypes | FormAction>
 
 let initialState = {
     posts: [
-        {id: 1, likeCount: 5, post: 'Hi! How are you?'},
-        {id: 2, likeCount: 15, post: 'I learn React!)))'},
+        {id: '1', likeCount: 5, post: 'Hi! How are you?'},
+        {id: '2', likeCount: 15, post: 'I learn React!)))'},
     ] as Array<PostType>,
     profile: null as ProfileType | null,
     status: ''
@@ -36,7 +37,7 @@ const ProfileReducer = (state = initialState, action: ActionsTypes): initialStat
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                id: 5,
+                id: v1(),
                 post: action.newPostText,
                 likeCount: 0
             }
@@ -56,7 +57,7 @@ const ProfileReducer = (state = initialState, action: ActionsTypes): initialStat
 }
 
 export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
-export const deletePost = (id: number) => ({type: DELETE_POST, id} as const)
+export const deletePost = (id: string) => ({type: DELETE_POST, id} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const savePhotoSuccess = (photos: PhotosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)

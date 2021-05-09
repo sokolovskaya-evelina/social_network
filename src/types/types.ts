@@ -3,7 +3,7 @@ import {reduxStoreType} from "../redux/redux_store";
 export type GetStateType = () => reduxStoreType
 
 export type PostType = {
-    id: number,
+    id: string,
     post: string,
     likeCount: number
 }
@@ -63,7 +63,7 @@ export type profilePageType = {
 }*/
 
 export type postDataType = {
-    id: number
+    id: string
     post: string
     likeCount: number
 }

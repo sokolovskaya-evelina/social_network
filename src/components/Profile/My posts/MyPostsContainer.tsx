@@ -19,7 +19,7 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         addPost: (newPostText: string) => {
             dispatch(addPostActionCreator(newPostText))
         },
-        deletePost: (id: number) => {
+        deletePost: (id: string) => {
             dispatch(deletePost(id))
         }
     }

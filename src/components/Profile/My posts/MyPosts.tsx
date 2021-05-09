@@ -9,7 +9,7 @@ import {Button, Card, Form} from 'antd';
 
 type MyPostType = {
     addPost: (newPostText: string) => void
-    deletePost: (id: number) => void
+    deletePost: (id: string) => void
     posts: Array<postDataType>
     newPostText: string
 }
